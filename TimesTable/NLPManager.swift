@@ -47,4 +47,5 @@ class NLPManager: NSObject {
         }
      return words
     }
+ 
 }
