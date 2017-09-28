@@ -21,16 +21,67 @@ class TimesTableTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testNYTAPI() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let nytManager = NYTManager();
+        let k:Any? = nytManager.getJSON(section:"obituaries")
+        XCTAssert(k != nil,"no value there")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testNLPSplit()
+    {
+        let nlpMan = NLPManager()
+        var result:[String]?
+        
+        result = nlpMan.tokenify("This is a simple String.")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 6,"parsed wrong number")
+        
+        result = nlpMan.tokenify("Jessica \"had\" a tall, white, tooth.")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 11,"parsed wrong number")
     }
+    
+    func testEnroll()
+    {
+        let nlpMan = NLPManager()
+        let shared = SharedGrammar.sharedInstance;
+        
+        shared.enrollSentence( nlpMan.tokenify("A B C B D E A F"))
+        shared.enrollSentence( nlpMan.tokenify("D G H E F C A B"))
+
+        
+       print(" the vocabulary is here")
+        for vocab in shared.symbols
+        {
+            print("Symbol: \(String(describing: vocab.symbol)) uuid: \(String(describing: vocab.uuid))")
+        }
+        print(" the rings are here")
+        for symRing in shared.rings
+        {
+            let sym = shared.symbolForUUID(symRing.uuid)
+            print("Ring: \(String(describing: sym))")
+            for link in symRing.ring
+            {
+                let linkName = shared.symbolForUUID(link.uuid)
+                print(" - Link: \(String(describing: linkName))")
+            }
+        }
+        // test that generator
+        print(" Generating")
+
+        let gen = shared.generate( 30)
+        print("\(gen)")
+        
+     
+    }
+    
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
     
 }

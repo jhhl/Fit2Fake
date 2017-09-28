@@ -13,6 +13,12 @@
 		70B3BE951F7AAA4200DBA39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70B3BE941F7AAA4200DBA39D /* Assets.xcassets */; };
 		70B3BE981F7AAA4200DBA39D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B3BE961F7AAA4200DBA39D /* LaunchScreen.storyboard */; };
 		70B3BEA31F7AAA4200DBA39D /* TimesTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEA21F7AAA4200DBA39D /* TimesTableTests.swift */; };
+		70B3BEAE1F7AAA6800DBA39D /* NYTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */; };
+		70B3BEAF1F7AAA6800DBA39D /* NYTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */; };
+		70B3BEB91F7C9B9100DBA39D /* SymbolRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */; };
+		70B3BEBA1F7C9B9100DBA39D /* SymbolRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */; };
+		70B3BEBC1F7CA45200DBA39D /* NLPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */; };
+		70B3BEBD1F7CA45200DBA39D /* NLPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +42,9 @@
 		70B3BE9E1F7AAA4200DBA39D /* TimesTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimesTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B3BEA21F7AAA4200DBA39D /* TimesTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesTableTests.swift; sourceTree = "<group>"; };
 		70B3BEA41F7AAA4200DBA39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTManager.swift; sourceTree = "<group>"; };
+		70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolRing.swift; sourceTree = "<group>"; };
+		70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NLPManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				70B3BE8D1F7AAA4200DBA39D /* AppDelegate.swift */,
+				70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */,
+				70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */,
+				70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */,
 				70B3BE8F1F7AAA4200DBA39D /* ViewController.swift */,
 				70B3BE911F7AAA4200DBA39D /* Main.storyboard */,
 				70B3BE941F7AAA4200DBA39D /* Assets.xcassets */,
@@ -199,8 +211,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70B3BEAE1F7AAA6800DBA39D /* NYTManager.swift in Sources */,
+				70B3BEB91F7C9B9100DBA39D /* SymbolRing.swift in Sources */,
 				70B3BE901F7AAA4200DBA39D /* ViewController.swift in Sources */,
 				70B3BE8E1F7AAA4200DBA39D /* AppDelegate.swift in Sources */,
+				70B3BEBC1F7CA45200DBA39D /* NLPManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +223,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70B3BEBD1F7CA45200DBA39D /* NLPManager.swift in Sources */,
 				70B3BEA31F7AAA4200DBA39D /* TimesTableTests.swift in Sources */,
+				70B3BEBA1F7C9B9100DBA39D /* SymbolRing.swift in Sources */,
+				70B3BEAF1F7AAA6800DBA39D /* NYTManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +375,7 @@
 				DEVELOPMENT_TEAM = 697BLY6WZ3;
 				INFOPLIST_FILE = TimesTable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.jhhl.TimesTable;
+				PRODUCT_BUNDLE_IDENTIFIER = net.jhhl.Fit2Fake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -372,7 +390,7 @@
 				DEVELOPMENT_TEAM = 697BLY6WZ3;
 				INFOPLIST_FILE = TimesTable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.jhhl.TimesTable;
+				PRODUCT_BUNDLE_IDENTIFIER = net.jhhl.Fit2Fake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
