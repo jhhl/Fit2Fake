@@ -25,14 +25,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yj6-o7-QDh">
-                                <rect key="frame" x="20" y="40" width="374" height="25.666666666666671"/>
-                                <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7xn-45-wLi">
-                                <rect key="frame" x="20" y="73.666666666666657" width="374" height="79.999999999999972"/>
+                                <rect key="frame" x="20" y="40" width="374" height="80"/>
                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="af1-cx-G3Q"/>
@@ -76,7 +70,7 @@
                                 </connections>
                             </collectionView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6WU-1X-78Z">
-                                <rect key="frame" x="20" y="161.66666666666669" width="374" height="140.00000000000006"/>
+                                <rect key="frame" x="20" y="128" width="374" height="140"/>
                                 <color key="backgroundColor" red="0.99432463882292055" green="0.96209532216106664" blue="0.84557394653744089" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="8o4-sI-ivC"/>
@@ -88,7 +82,7 @@
                                 </connections>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jfz-T2-QSC">
-                                <rect key="frame" x="20" y="310" width="73" height="32"/>
+                                <rect key="frame" x="20" y="276.33333333333331" width="73" height="32"/>
                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="18"/>
                                 <state key="normal" title="FAKE IT">
@@ -99,7 +93,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kev-RB-mEP">
-                                <rect key="frame" x="339" y="309" width="55" height="33"/>
+                                <rect key="frame" x="339" y="275.33333333333331" width="55" height="33"/>
                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="55" id="JQZ-62-egy"/>
@@ -113,7 +107,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ajn-7g-jOc">
-                                <rect key="frame" x="20" y="350" width="374" height="366"/>
+                                <rect key="frame" x="20" y="316.33333333333326" width="374" height="399.66666666666674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoCell" id="xZh-cK-J0F" customClass="InfoCell" customModule="TimesTable" customModuleProvider="target">
@@ -131,10 +125,11 @@
                                 </connections>
                             </tableView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.050000000000000003" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gQH-ba-1Ax">
-                                <rect key="frame" x="99" y="310" width="234" height="33.333333333333314"/>
+                                <rect key="frame" x="99" y="275.33333333333331" width="234" height="33.333333333333371"/>
                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="act_fakeIt" destination="BYZ-38-t0r" eventType="valueChanged" id="A1Y-5I-mNz"/>
+                                    <action selector="act_SliderIsDone" destination="BYZ-38-t0r" eventType="touchDragExit" id="7lS-WW-2DS"/>
+                                    <action selector="act_SliderIsSliding" destination="BYZ-38-t0r" eventType="valueChanged" id="AYB-BR-Ytw"/>
                                 </connections>
                             </slider>
                         </subviews>
@@ -151,23 +146,19 @@
                             <constraint firstItem="Jfz-T2-QSC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="XFC-7K-mmB"/>
                             <constraint firstItem="6WU-1X-78Z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YMz-cP-3BO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6WU-1X-78Z" secondAttribute="trailing" constant="20" id="aBr-zt-uAI"/>
+                            <constraint firstItem="7xn-45-wLi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="aM8-TF-7To"/>
                             <constraint firstItem="gQH-ba-1Ax" firstAttribute="leading" secondItem="Jfz-T2-QSC" secondAttribute="trailing" constant="8" id="bZz-1c-hja"/>
-                            <constraint firstItem="yj6-o7-QDh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="d1d-cW-ETy"/>
                             <constraint firstItem="Ajn-7g-jOc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iKs-D1-X4E"/>
                             <constraint firstItem="Ajn-7g-jOc" firstAttribute="top" secondItem="Jfz-T2-QSC" secondAttribute="bottom" constant="8" id="jae-iP-Hcw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7xn-45-wLi" secondAttribute="trailing" constant="20" id="jc9-5z-Rhu"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yj6-o7-QDh" secondAttribute="trailing" constant="20" id="ogC-4Q-CBV"/>
                             <constraint firstItem="Jfz-T2-QSC" firstAttribute="top" secondItem="6WU-1X-78Z" secondAttribute="bottom" constant="8" id="pf3-Pe-Ivz"/>
                             <constraint firstItem="Ajn-7g-jOc" firstAttribute="top" secondItem="gQH-ba-1Ax" secondAttribute="bottom" constant="8" id="qHR-Ew-BC1"/>
                             <constraint firstItem="gQH-ba-1Ax" firstAttribute="top" secondItem="6WU-1X-78Z" secondAttribute="bottom" constant="8" id="uSH-Wf-mW6"/>
-                            <constraint firstItem="7xn-45-wLi" firstAttribute="top" secondItem="yj6-o7-QDh" secondAttribute="bottom" constant="8" id="wXx-5q-KLJ"/>
-                            <constraint firstItem="yj6-o7-QDh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="yAv-2V-xey"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="cv_sections" destination="7xn-45-wLi" id="eEx-DN-dDv"/>
-                        <outlet property="lb_title" destination="yj6-o7-QDh" id="eDP-WS-wzM"/>
                         <outlet property="sl_gensize" destination="gQH-ba-1Ax" id="Ct1-Ic-vSW"/>
                         <outlet property="tv_bylines" destination="Ajn-7g-jOc" id="kZE-e7-o5N"/>
                         <outlet property="txv_fakeNews" destination="6WU-1X-78Z" id="oXs-aP-bYj"/>

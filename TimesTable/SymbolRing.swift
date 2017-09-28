@@ -204,7 +204,7 @@ class SharedGrammar {
     
     public func generate(_ howMany:UInt) -> String
     {
-        if anchor.ring.count < 2
+        if anchor.ring.count < 1
         {
             return "Not enough words yet"
         }
@@ -225,8 +225,8 @@ class SharedGrammar {
             let spotSym = symbolForUUID(spot.uuid)!
             result = "\(result) \(spotSym)"
             countdown = countdown-1
-            // stop at the end of a sentence
-            if spot == anchor
+            // stop at the end of a sentence unless we didn't really gen anything
+            if spot == anchor && countdown < howMany - 2
             {
                 countdown=0
             }

@@ -41,6 +41,10 @@ class TimesTableTests: XCTestCase {
         result = nlpMan.tokenify("Jessica \"had\" a tall, white, tooth.")
         XCTAssert(result != nil,"no result")
         XCTAssert(result!.count == 11,"parsed wrong number")
+        
+        result = nlpMan.tokenify("Mr. Bob Dobolina, Jr.")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 5,"parsed wrong number")
     }
     
     func testEnroll()
