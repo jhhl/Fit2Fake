@@ -78,7 +78,9 @@ class NLPManager: NSObject {
         "Rev.":"Rev@",
         "St.":"St@",
         "Rd.":"Rd@",
-        "Ave.":"Ave@"
+        "Ave.":"Ave@",
+        "N.Y.C.":"N@Y@C@",
+        "N.Y.":"N@Y@"
     ]
     static let filterBackDict:[String:String] = [
         "Mr@":"Mr.",
@@ -92,7 +94,9 @@ class NLPManager: NSObject {
         "Rev@":"Rev.",
         "St@":"St.",
         "Rd@":"Rd.",
-        "Ave@":"Ave."
+        "Ave@":"Ave.",
+        "N@Y@C@":"N.Y.C.",
+        "N@Y@":"N.Y."
 
     ]
     

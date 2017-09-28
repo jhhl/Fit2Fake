@@ -23,18 +23,21 @@ class ViewController:
     UICollectionViewDataSource,
     UITableViewDelegate,
     UITableViewDataSource,
-    UITextViewDelegate
+    UITextViewDelegate,
+    UIDocumentInteractionControllerDelegate
 {
     
     @IBOutlet var cv_sections:UICollectionView!
     @IBOutlet var tv_bylines:UITableView!
     @IBOutlet var txv_fakeNews:UITextView!
     @IBOutlet var sl_gensize:UISlider!
+    @IBOutlet var bt_share:UIButton!
 
     public var dataSourceSections:[String]?
     public var dataSource:[String]?
     public var currentSection:String
     public var generationSentenceSize:UInt
+    var sharedFilePath:String
     
     var nytManager:NYTManager
     
@@ -50,6 +53,7 @@ class ViewController:
         self.nytManager = NYTManager()
         self.generationSentenceSize = 40
         self.currentSection = "Choose A Section"
+        sharedFilePath=""
         super.init(coder:aDecoder)
     }
     
@@ -230,17 +234,80 @@ class ViewController:
     {
         SharedGrammar.sharedInstance.forget()
     }
-//
-//    // MARK: - Document sharing
-//    public func share()
-//    {
-//        let docController = UIDocumentInteractionController()
-//        // save out that text
-//        let text:String = txv_fakeNews.text;
-//
-//        text.write(toFile: "fit2fake.txt", atomically: true, encoding: NSUTF8StringEncoding)
-//
-//    }
+
+    // MARK: - Document sharing: doesn't work too well for some reason.
+    
+    @IBAction func act_share(_ button: UIButton)
+    {
+        //        let rect = button.convert(button.frame, to: self.view)
+        var rect = button.frame
+        rect.origin.y = rect.origin.y + (button.superview?.frame.origin.y)!
+        //        var rect = button.frame
+        //        rect.origin.y=40.0
+        share(rect)
+    }
+    
+    public func share(_ rect:CGRect)
+    {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        
+        let now = NSDate()
+        sharedFilePath = documentsPath + "/fit2fake \(now).txt"
+        
+        // save out that text
+        let fakeText:String = txv_fakeNews.text;
+        do {
+            try fakeText.write(toFile: sharedFilePath, atomically: true, encoding: String.Encoding.utf8)
+        } catch
+        {
+        }
+        
+        let url = URL(fileURLWithPath: sharedFilePath)
+        
+        let docController = UIDocumentInteractionController(url: url)
+        docController.delegate = self;
+        docController.presentOptionsMenu(from: rect, in: self.view, animated: true)
+    }
+    
+ 
+    func removeSharedFile()
+    {
+        do {
+            try FileManager.default.removeItem(atPath: sharedFilePath)
+        }
+        catch
+        {
+        }
+    }
+ 
+    // Options menu presented/dismissed on document.  Use to set up any HI underneath.
+      func documentInteractionControllerWillPresentOptionsMenu(_ controller: UIDocumentInteractionController)
+    {
+    }
+    
+      func documentInteractionControllerDidDismissOptionsMenu(_ controller: UIDocumentInteractionController)
+     {
+        removeSharedFile()
+    }
+    
+    // Open in menu presented/dismissed on document.  Use to set up any HI underneath.
+      func documentInteractionControllerWillPresentOpenInMenu(_ controller: UIDocumentInteractionController)
+    {
+    }
+      func documentInteractionControllerDidDismissOpenInMenu(_ controller: UIDocumentInteractionController)
+    {
+        removeSharedFile()
+    }
+    
+    // Synchronous.  May be called when inside preview.  Usually followed by app termination.  Can use willBegin... to set annotation.
+      func documentInteractionController(_ controller: UIDocumentInteractionController, willBeginSendingToApplication application: String?) // bundle ID
+    {
+        
+    }
+      func documentInteractionController(_ controller: UIDocumentInteractionController, didEndSendingToApplication application: String?)
+    {
+        
+    }
     
 }
 

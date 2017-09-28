@@ -81,33 +81,63 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="1h4-P2-F20"/>
                                 </connections>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jfz-T2-QSC">
-                                <rect key="frame" x="20" y="276.33333333333331" width="73" height="32"/>
-                                <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="18"/>
-                                <state key="normal" title="FAKE IT">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="act_fakeIt" destination="BYZ-38-t0r" eventType="touchUpInside" id="MTp-mc-ZcL"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kev-RB-mEP">
-                                <rect key="frame" x="339" y="275.33333333333331" width="55" height="33"/>
-                                <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="750" constant="55" id="JQZ-62-egy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
-                                <state key="normal" title="FORGET">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="act_forgetIt" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mbd-dw-wZy"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hBT-ZQ-Jsm">
+                                <rect key="frame" x="20" y="276" width="374" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jfz-T2-QSC">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
+                                        <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="OXF-HR-zZx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
+                                        <state key="normal" title="FAKE IT">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="act_fakeIt" destination="BYZ-38-t0r" eventType="touchUpInside" id="MTp-mc-ZcL"/>
+                                        </connections>
+                                    </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.050000000000000003" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gQH-ba-1Ax">
+                                        <rect key="frame" x="62" y="0.0" width="186" height="31"/>
+                                        <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="act_SliderIsDone" destination="BYZ-38-t0r" eventType="touchDragExit" id="7lS-WW-2DS"/>
+                                            <action selector="act_SliderIsSliding" destination="BYZ-38-t0r" eventType="valueChanged" id="AYB-BR-Ytw"/>
+                                        </connections>
+                                    </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kev-RB-mEP">
+                                        <rect key="frame" x="250" y="0.0" width="60" height="30"/>
+                                        <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="E6D-wq-sSe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
+                                        <state key="normal" title="FORGET">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="act_forgetIt" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mbd-dw-wZy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XP7-5R-d5j">
+                                        <rect key="frame" x="314" y="0.0" width="60" height="30"/>
+                                        <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="IzI-gM-009"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
+                                        <state key="normal" title="SHARE">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="act_share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CIs-BR-V5w"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ajn-7g-jOc">
-                                <rect key="frame" x="20" y="316.33333333333326" width="374" height="399.66666666666674"/>
+                                <rect key="frame" x="20" y="314.33333333333326" width="374" height="401.66666666666674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoCell" id="xZh-cK-J0F" customClass="InfoCell" customModule="TimesTable" customModuleProvider="target">
@@ -124,40 +154,27 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="3Qg-UQ-xsQ"/>
                                 </connections>
                             </tableView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.050000000000000003" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gQH-ba-1Ax">
-                                <rect key="frame" x="99" y="275.33333333333331" width="234" height="33.333333333333371"/>
-                                <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="act_SliderIsDone" destination="BYZ-38-t0r" eventType="touchDragExit" id="7lS-WW-2DS"/>
-                                    <action selector="act_SliderIsSliding" destination="BYZ-38-t0r" eventType="valueChanged" id="AYB-BR-Ytw"/>
-                                </connections>
-                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kev-RB-mEP" firstAttribute="top" secondItem="6WU-1X-78Z" secondAttribute="bottom" constant="8" id="22k-Nl-oTE"/>
-                            <constraint firstItem="Ajn-7g-jOc" firstAttribute="top" secondItem="kev-RB-mEP" secondAttribute="bottom" constant="8" id="2nF-68-YzQ"/>
                             <constraint firstItem="6WU-1X-78Z" firstAttribute="top" secondItem="7xn-45-wLi" secondAttribute="bottom" constant="8" id="2nj-qb-8zW"/>
-                            <constraint firstItem="kev-RB-mEP" firstAttribute="leading" secondItem="gQH-ba-1Ax" secondAttribute="trailing" constant="8" id="9Gd-dH-npM"/>
                             <constraint firstAttribute="bottom" secondItem="Ajn-7g-jOc" secondAttribute="bottom" constant="20" id="GBt-dz-hQU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ajn-7g-jOc" secondAttribute="trailing" constant="20" id="GgD-wY-Lj9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kev-RB-mEP" secondAttribute="trailing" constant="20" id="VBo-6Q-cH0"/>
+                            <constraint firstItem="hBT-ZQ-Jsm" firstAttribute="top" secondItem="6WU-1X-78Z" secondAttribute="bottom" constant="8" id="UcC-ei-XW0"/>
                             <constraint firstItem="7xn-45-wLi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="WM7-ge-9ZA"/>
-                            <constraint firstItem="Jfz-T2-QSC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="XFC-7K-mmB"/>
                             <constraint firstItem="6WU-1X-78Z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YMz-cP-3BO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6WU-1X-78Z" secondAttribute="trailing" constant="20" id="aBr-zt-uAI"/>
                             <constraint firstItem="7xn-45-wLi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="aM8-TF-7To"/>
-                            <constraint firstItem="gQH-ba-1Ax" firstAttribute="leading" secondItem="Jfz-T2-QSC" secondAttribute="trailing" constant="8" id="bZz-1c-hja"/>
+                            <constraint firstAttribute="trailing" secondItem="hBT-ZQ-Jsm" secondAttribute="trailing" constant="20" id="edU-J1-xx9"/>
                             <constraint firstItem="Ajn-7g-jOc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iKs-D1-X4E"/>
-                            <constraint firstItem="Ajn-7g-jOc" firstAttribute="top" secondItem="Jfz-T2-QSC" secondAttribute="bottom" constant="8" id="jae-iP-Hcw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7xn-45-wLi" secondAttribute="trailing" constant="20" id="jc9-5z-Rhu"/>
-                            <constraint firstItem="Jfz-T2-QSC" firstAttribute="top" secondItem="6WU-1X-78Z" secondAttribute="bottom" constant="8" id="pf3-Pe-Ivz"/>
-                            <constraint firstItem="Ajn-7g-jOc" firstAttribute="top" secondItem="gQH-ba-1Ax" secondAttribute="bottom" constant="8" id="qHR-Ew-BC1"/>
-                            <constraint firstItem="gQH-ba-1Ax" firstAttribute="top" secondItem="6WU-1X-78Z" secondAttribute="bottom" constant="8" id="uSH-Wf-mW6"/>
+                            <constraint firstItem="Ajn-7g-jOc" firstAttribute="top" secondItem="hBT-ZQ-Jsm" secondAttribute="bottom" constant="8" id="vEQ-WN-zNa"/>
+                            <constraint firstItem="hBT-ZQ-Jsm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="x3p-sq-Wob"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bt_share" destination="XP7-5R-d5j" id="HeK-tN-IRI"/>
                         <outlet property="cv_sections" destination="7xn-45-wLi" id="eEx-DN-dDv"/>
                         <outlet property="sl_gensize" destination="gQH-ba-1Ax" id="Ct1-Ic-vSW"/>
                         <outlet property="tv_bylines" destination="Ajn-7g-jOc" id="kZE-e7-o5N"/>
