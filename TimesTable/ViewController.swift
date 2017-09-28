@@ -208,5 +208,17 @@ class ViewController:
     {
         SharedGrammar.sharedInstance.forget()
     }
+//
+//    // MARK: - Document sharing
+//    public func share()
+//    {
+//        let docController = UIDocumentInteractionController()
+//        // save out that text
+//        let text:String = txv_fakeNews.text;
+//
+//        text.write(toFile: "fit2fake.txt", atomically: true, encoding: NSUTF8StringEncoding)
+//
+//    }
+    
 }
 
