@@ -28,24 +28,28 @@ class ViewController:
     
     @IBOutlet var cv_sections:UICollectionView!
     @IBOutlet var tv_bylines:UITableView!
-    @IBOutlet var lb_title:UILabel!
     @IBOutlet var txv_fakeNews:UITextView!
     @IBOutlet var sl_gensize:UISlider!
 
     public var dataSourceSections:[String]?
     public var dataSource:[String]?
-    public var currentSection:String?
+    public var currentSection:String
+    public var generationSentenceSize:UInt
     
     var nytManager:NYTManager
     
     let evenColor = UIColor(red:0.99,green:0.96,blue:0.84,alpha:1.0)
     let oddColor = UIColor(red:0.90,green:0.96,blue:0.98,alpha:1.0)
+    let normalColor = UIColor(white:1.0, alpha:0.0)
+    let selectedColor = UIColor(white:0.0, alpha:0.1)
 
     // MARK: - initializing and other setup
 
     // might need this
     required init?(coder aDecoder: NSCoder) {
         self.nytManager = NYTManager()
+        self.generationSentenceSize = 40
+        self.currentSection = "Choose A Section"
         super.init(coder:aDecoder)
     }
     
@@ -55,7 +59,7 @@ class ViewController:
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.dataSourceSections = self.nytManager.sections
-        self.dataSource = ["Pick a section, will ya?"] // will be filled by section query
+        self.dataSource = ["Choose a Section, will ya?"] // will be filled by section query
         self.txv_fakeNews.text = "All the News That's Fit To Fake"
         self.setupCollectionView()
     }
@@ -113,6 +117,14 @@ class ViewController:
         let cell:SectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SectionCell",
                                                                   for: indexPath) as! SectionCell
         cell.lb_text!.text=dataSourceSections![indexPath.row]
+        if (cell.lb_text!.text?.isEqual(currentSection))!
+        {
+            cell.backgroundColor=selectedColor
+        }
+        else
+        {
+            cell.backgroundColor=normalColor
+        }
         return cell
     }
     
@@ -126,14 +138,15 @@ class ViewController:
     {
         let cell:SectionCell = collectionView.cellForItem(at: indexPath) as! SectionCell
         currentSection =  cell.lb_text!.text!
-        lb_title.text = currentSection
+        collectionView.reloadData() // re-renders the cell backgrounds
         // now we can perform the query that fills the table...
-        if((nytManager.getJSON(section: currentSection!)) != nil)
+        if((nytManager.getJSON(section: currentSection)) != nil)
         {
             dataSource = nytManager.recordsFor(key: "abstract")
             tv_bylines.reloadData()
         }
     }
+
     
     // MARK: - table view  delegate and datasource
 
@@ -196,13 +209,22 @@ class ViewController:
     func generateFake()
     {
         let shared = SharedGrammar.sharedInstance;
-        let amount:UInt =   UInt(1000*sl_gensize.value) + 20
-        let generated = shared.generate(amount)
+         let generated = shared.generate(self.generationSentenceSize)
         self.txv_fakeNews.text = generated
     }
+    
     @IBAction func act_fakeIt()
     {
       generateFake()
+    }
+    
+    @IBAction func act_SliderIsSliding()
+    {
+        self.generationSentenceSize = UInt(1000*sl_gensize.value) + 20
+    }
+    @IBAction func act_SliderIsDone()
+    {
+        generateFake()
     }
     @IBAction func act_forgetIt()
     {
