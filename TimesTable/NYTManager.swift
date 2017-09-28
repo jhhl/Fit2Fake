@@ -13,6 +13,7 @@ class NYTManager: NSObject {
     var rawJSONData:Data?
     var json: [String: Any]?
     
+    // TODO: ideally, this api key would come out of a keystore, and be set  manually if unset
     let apiKey = "097831df4aa3483b8a1adcfb2b269ef9"
     
     let sections:Array = [
