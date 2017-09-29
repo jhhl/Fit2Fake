@@ -318,7 +318,7 @@ class ViewController:
     public func share(_ rect:CGRect)
     {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        
+        cleanoutOldFiles()
         let now = NSDate()
         sharedFilePath = documentsPath + "/fit2fake \(now).txt"
         
@@ -326,18 +326,37 @@ class ViewController:
         let fakeText:String = txv_fakeNews.text;
         do {
             try fakeText.write(toFile: sharedFilePath, atomically: true, encoding: String.Encoding.utf8)
+            let url = URL(fileURLWithPath: sharedFilePath)
+            let docController = UIDocumentInteractionController(url: url)
+            docController.delegate = self;
+            docController.presentOptionsMenu(from: rect, in: self.view, animated: true)
         } catch
         {
+            print(error)
+            return
         }
-        
-        let url = URL(fileURLWithPath: sharedFilePath)
-        
-        let docController = UIDocumentInteractionController(url: url)
-        docController.delegate = self;
-        docController.presentOptionsMenu(from: rect, in: self.view, animated: true)
     }
     
- 
+  func cleanoutOldFiles()
+  {
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+    let paths = FileManager.default.subpaths(atPath: documentsPath)
+    for path:String in paths!
+    {
+        if path.contains("fit2fake")
+        {
+            do {
+            try FileManager.default.removeItem(atPath: documentsPath+"/"+path)
+            }
+            catch
+            {
+                print(error)
+            }
+        }
+    }
+    
+    
+    }
     func removeSharedFile()
     {
         do {
