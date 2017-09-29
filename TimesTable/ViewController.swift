@@ -250,6 +250,7 @@ class ViewController:
     {
         SharedGrammar.sharedInstance.forget()
         txv_fakeNews.text = "All the News That's Fit To Fake"
+        speak_stop()
     }
 
     @IBAction func act_speak(_ button: UIButton)

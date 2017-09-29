@@ -222,9 +222,13 @@ class SharedGrammar {
             let nextIx = Int(arc4random()) %  spot.ring.count
             
             spot = spot.ring[nextIx]
-            let spotSym = symbolForUUID(spot.uuid)!
-            result = "\(result) \(spotSym)"
-            countdown = countdown-1
+            // don't stick those spaces in or count them .
+            if spot != anchor
+            {
+                let spotSym = symbolForUUID(spot.uuid)!
+                result = "\(result) \(spotSym)"
+                countdown = countdown-1
+            }
             // stop at the end of a sentence unless we didn't really gen anything
             if spot == anchor && countdown < howMany - 2
             {

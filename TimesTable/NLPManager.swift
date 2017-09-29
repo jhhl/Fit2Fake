@@ -137,6 +137,9 @@ class NLPManager: NSObject {
         "Oct.":"Oct@",
         "Nov.":"Nov@",
         "Dec.":"Dec@",
+        "'t":"@t",
+        "'nt":"@nt",
+        "'ll":"@ll",
     ]
     static let filterBackDict:[String:String] = [
         "Mr@":"Mr.",
@@ -163,6 +166,9 @@ class NLPManager: NSObject {
         "Oct@":"Oct.",
         "Nov@":"Nov.",
         "Dec@":"Dec.",
+        "@t":"'t",
+        "@nt":"'nt",
+        "@ll":"'ll",
     ]
     
     func filterDots(_ s:String) ->String
