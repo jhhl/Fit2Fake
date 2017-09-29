@@ -36,15 +36,31 @@ class TimesTableTests: XCTestCase {
         
         result = nlpMan.tokenify("This is a simple String.")
         XCTAssert(result != nil,"no result")
-        XCTAssert(result!.count == 6,"parsed wrong number")
+        XCTAssert(result!.count == 7,"parsed wrong number, got:\(result!.count)")
         
         result = nlpMan.tokenify("Jessica \"had\" a tall, white, tooth.")
         XCTAssert(result != nil,"no result")
-        XCTAssert(result!.count == 11,"parsed wrong number")
+        XCTAssert(result!.count == 12,"parsed wrong number, got:\(result!.count)")
         
         result = nlpMan.tokenify("Mr. Bob Dobolina, Jr.")
         XCTAssert(result != nil,"no result")
-        XCTAssert(result!.count == 5,"parsed wrong number")
+        XCTAssert(result!.count == 5,"parsed wrong number, got:\(result!.count)")
+        
+        result = nlpMan.tokenify("the X. files")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 3,"parsed wrong number, got:\(result!.count)")
+        
+        result = nlpMan.tokenify("the A.U.M.I. files")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 3,"parsed wrong number, got:\(result!.count)")
+     
+        result = nlpMan.tokenify("he had 1,234.56 dollars, and no cents")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 8,"parsed wrong number, got:\(result!.count)")
+        
+        result = nlpMan.tokenify("it cost $45.23")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 3,"parsed wrong number, got:\(result!.count)")
     }
     
     func testEnroll()

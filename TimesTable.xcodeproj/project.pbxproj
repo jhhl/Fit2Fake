@@ -19,6 +19,7 @@
 		70B3BEBA1F7C9B9100DBA39D /* SymbolRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */; };
 		70B3BEBC1F7CA45200DBA39D /* NLPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */; };
 		70B3BEBD1F7CA45200DBA39D /* NLPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */; };
+		70CB05711F7DF5E500486872 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70CB05701F7DF5E500486872 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTManager.swift; sourceTree = "<group>"; };
 		70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolRing.swift; sourceTree = "<group>"; };
 		70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NLPManager.swift; sourceTree = "<group>"; };
+		70CB056E1F7DF57900486872 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		70CB05701F7DF5E500486872 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70CB05711F7DF5E500486872 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +75,7 @@
 				70B3BE8C1F7AAA4200DBA39D /* TimesTable */,
 				70B3BEA11F7AAA4200DBA39D /* TimesTableTests */,
 				70B3BE8B1F7AAA4200DBA39D /* Products */,
+				70CB056D1F7DF57800486872 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +111,15 @@
 				70B3BEA41F7AAA4200DBA39D /* Info.plist */,
 			);
 			path = TimesTableTests;
+			sourceTree = "<group>";
+		};
+		70CB056D1F7DF57800486872 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70CB05701F7DF5E500486872 /* AVFoundation.framework */,
+				70CB056E1F7DF57900486872 /* AVKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

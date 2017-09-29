@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchBox" translatesAutoresizingMaskIntoConstraints="NO" id="R68-VN-0fo">
-                                <rect key="frame" x="257" y="396" width="320" height="320"/>
+                                <rect key="frame" x="20" y="159" width="794" height="794"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="R68-VN-0fo" secondAttribute="height" multiplier="1:1" id="6cB-7u-wfL"/>
                                 </constraints>
@@ -29,6 +29,10 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="R68-VN-0fo" secondAttribute="bottom" constant="20" id="Qnt-ZL-Ycd"/>
                             <constraint firstItem="R68-VN-0fo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="R55-ok-6A0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="R68-VN-0fo" secondAttribute="bottom" priority="750" constant="20" id="RaJ-e7-T4h"/>
+                            <constraint firstItem="R68-VN-0fo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" priority="750" constant="20" id="UIE-Us-yTm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="R68-VN-0fo" secondAttribute="trailing" priority="750" constant="20" id="V0u-ED-hvx"/>
+                            <constraint firstItem="R68-VN-0fo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="750" constant="20" id="bgO-OM-2lg"/>
                             <constraint firstItem="R68-VN-0fo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eRI-qJ-WUq"/>
                             <constraint firstItem="R68-VN-0fo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fdk-QO-PsD"/>
                             <constraint firstItem="R68-VN-0fo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hJa-ky-Oqq"/>

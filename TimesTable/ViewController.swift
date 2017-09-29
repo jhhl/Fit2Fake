@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SectionCell:UICollectionViewCell
 {
@@ -15,8 +16,9 @@ class SectionCell:UICollectionViewCell
 
 class InfoCell : UITableViewCell
 {
- 
+    @IBOutlet var lb_text:UILabel?
 }
+
 class ViewController:
     UIViewController,
     UICollectionViewDelegate,
@@ -24,7 +26,8 @@ class ViewController:
     UITableViewDelegate,
     UITableViewDataSource,
     UITextViewDelegate,
-    UIDocumentInteractionControllerDelegate
+    UIDocumentInteractionControllerDelegate,
+    AVSpeechSynthesizerDelegate
 {
     
     @IBOutlet var cv_sections:UICollectionView!
@@ -32,6 +35,7 @@ class ViewController:
     @IBOutlet var txv_fakeNews:UITextView!
     @IBOutlet var sl_gensize:UISlider!
     @IBOutlet var bt_share:UIButton!
+    @IBOutlet var bt_speak:UIButton!
 
     public var dataSourceSections:[String]?
     public var dataSource:[String]?
@@ -39,21 +43,23 @@ class ViewController:
     public var generationSentenceSize:UInt
     var sharedFilePath:String
     
-    var nytManager:NYTManager
-    
+    let nytManager:NYTManager = NYTManager()
+    let speaker = AVSpeechSynthesizer()
+    var talkAllTheTime = false;
+
     let evenColor = UIColor(red:0.99,green:0.96,blue:0.84,alpha:1.0)
     let oddColor = UIColor(red:0.90,green:0.96,blue:0.98,alpha:1.0)
     let normalColor = UIColor(white:1.0, alpha:0.0)
     let selectedColor = UIColor(white:0.0, alpha:0.1)
-
+    
     // MARK: - initializing and other setup
 
     // might need this
     required init?(coder aDecoder: NSCoder) {
-        self.nytManager = NYTManager()
-        self.generationSentenceSize = 40
-        self.currentSection = "Choose A Section"
+        generationSentenceSize = 150
+        currentSection = "Choose A Section"
         sharedFilePath=""
+        
         super.init(coder:aDecoder)
     }
     
@@ -61,11 +67,14 @@ class ViewController:
     override func viewDidLoad()
     {
         super.viewDidLoad()
+// we should have speaker by now.
+        speaker.delegate = self
+
         // Do any additional setup after loading the view, typically from a nib.
-        self.dataSourceSections = self.nytManager.sections
-        self.dataSource = ["Choose a Section, will ya?"] // will be filled by section query
-        self.txv_fakeNews.text = "All the News That's Fit To Fake"
-        self.setupCollectionView()
+        dataSourceSections = self.nytManager.sections
+        dataSource = ["Choose a Section, will ya?"] // will be filled by section query
+        txv_fakeNews.text = "All the News That's Fit To Fake"
+        setupCollectionView()
     }
     
     override func didReceiveMemoryWarning()
@@ -144,11 +153,14 @@ class ViewController:
         currentSection =  cell.lb_text!.text!
         collectionView.reloadData() // re-renders the cell backgrounds
         // now we can perform the query that fills the table...
-        if((nytManager.getJSON(section: currentSection)) != nil)
-        {
-            dataSource = nytManager.recordsFor(key: "abstract")
-            tv_bylines.reloadData()
+        DispatchQueue.global(qos: .userInitiated).async {
+            if((self.nytManager.getJSON(section: self.currentSection)) != nil)
+            {
+                self.dataSource = self.nytManager.recordsFor(key: "abstract")
+                DispatchQueue.main.async {self.tv_bylines.reloadData()}
+            }
         }
+        
     }
 
     
@@ -184,14 +196,14 @@ class ViewController:
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell",for: indexPath)
-        cell.textLabel?.text = dataSource![row]
-        cell.textLabel?.numberOfLines=0 // wrap all the time
+        let cell:InfoCell = tableView.dequeueReusableCell(withIdentifier: "InfoCell",for: indexPath) as! InfoCell
+        cell.lb_text?.text = dataSource![row]
+        cell.lb_text?.numberOfLines=0 // wrap all the time
         cell.backgroundColor = indexPath.row % 2 == 0 ? evenColor : oddColor;
         
         var superbounds = tableView.bounds
         superbounds.size.height = 10000.0
-        cell.textLabel?.textRect(forBounds: superbounds, limitedToNumberOfLines: 50)
+        cell.lb_text?.textRect(forBounds: superbounds, limitedToNumberOfLines: 50)
         return cell
     }
     // MARK: - disable typing into the text view
@@ -213,8 +225,12 @@ class ViewController:
     func generateFake()
     {
         let shared = SharedGrammar.sharedInstance;
-         let generated = shared.generate(self.generationSentenceSize)
+        let generated = shared.generate(self.generationSentenceSize)
         self.txv_fakeNews.text = generated
+        if(talkAllTheTime)
+        {
+            speak_start()
+        }
     }
     
     @IBAction func act_fakeIt()
@@ -235,6 +251,55 @@ class ViewController:
         SharedGrammar.sharedInstance.forget()
     }
 
+    @IBAction func act_speak(_ button: UIButton)
+    {
+        button.isSelected = !button.isSelected
+        
+        talkAllTheTime = button.isSelected
+        if button.isSelected
+        {
+            speak_start()
+        }
+        else
+        {
+            speak_stop()
+        }
+    }
+    func speak_start()
+    {
+        if speaker.isSpeaking
+        {
+             speaker.stopSpeaking(at: AVSpeechBoundary.immediate)
+        }
+        bt_speak.setTitle( "STOP", for: UIControlState.normal)
+        let utterance = AVSpeechUtterance(string:txv_fakeNews.text)
+        speaker.speak(utterance)
+    }
+    func speak_stop()
+    {
+        bt_speak.setTitle( "SPEAK", for: UIControlState.normal)
+        speaker.stopSpeaking(at: AVSpeechBoundary.word)
+    }
+    
+    // delegate methods for speaker
+     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance)
+     {
+    }
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance)
+    {
+         speak_stop()
+    }
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance)
+    {
+    }
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance)
+    {
+    }
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance)
+    {
+         speak_stop()
+    }
+    
     // MARK: - Document sharing: doesn't work too well for some reason.
     
     @IBAction func act_share(_ button: UIButton)
