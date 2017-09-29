@@ -249,6 +249,7 @@ class ViewController:
     @IBAction func act_forgetIt()
     {
         SharedGrammar.sharedInstance.forget()
+        txv_fakeNews.text = "All the News That's Fit To Fake"
     }
 
     @IBAction func act_speak(_ button: UIButton)
@@ -265,6 +266,8 @@ class ViewController:
             speak_stop()
         }
     }
+    // this now lets it speak all the time, and then stop doing that.
+    
     func speak_start()
     {
         if speaker.isSpeaking
@@ -275,6 +278,7 @@ class ViewController:
         let utterance = AVSpeechUtterance(string:txv_fakeNews.text)
         speaker.speak(utterance)
     }
+    
     func speak_stop()
     {
         bt_speak.setTitle( "SPEAK", for: UIControlState.normal)
@@ -287,7 +291,6 @@ class ViewController:
     }
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance)
     {
-         speak_stop()
     }
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance)
     {
@@ -297,7 +300,6 @@ class ViewController:
     }
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance)
     {
-         speak_stop()
     }
     
     // MARK: - Document sharing: doesn't work too well for some reason.
