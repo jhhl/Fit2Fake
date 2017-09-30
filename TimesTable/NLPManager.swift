@@ -161,7 +161,7 @@ class NLPManager: NSObject {
         "Jun@":"Jun.",
         "Jul@":"Jul.",
         "Aug@":"Aug.",
-        "Sep":"Sep.",
+        "Sep@":"Sep.",
         "Sept@":"Sept.",
         "Oct@":"Oct.",
         "Nov@":"Nov.",

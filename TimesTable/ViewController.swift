@@ -46,6 +46,7 @@ class ViewController:
     let nytManager:NYTManager = NYTManager()
     let speaker = AVSpeechSynthesizer()
     var talkAllTheTime = false;
+    var docController: UIDocumentInteractionController?
 
     let evenColor = UIColor(red:0.99,green:0.96,blue:0.84,alpha:1.0)
     let oddColor = UIColor(red:0.90,green:0.96,blue:0.98,alpha:1.0)
@@ -317,20 +318,23 @@ class ViewController:
     
     public func share(_ rect:CGRect)
     {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        //
+        let documentsPath:String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         cleanoutOldFiles()
-        let now = NSDate()
-        sharedFilePath = documentsPath + "/fit2fake \(now).txt"
-        
+        sharedFilePath = documentsPath + "/fit2fake.txt"
+        let url = URL(fileURLWithPath: sharedFilePath)
+
         // save out that text
         let fakeText:String = txv_fakeNews.text;
-        do {
-            try fakeText.write(toFile: sharedFilePath, atomically: true, encoding: String.Encoding.utf8)
-            let url = URL(fileURLWithPath: sharedFilePath)
-            let docController = UIDocumentInteractionController(url: url)
-            docController.delegate = self;
-            docController.presentOptionsMenu(from: rect, in: self.view, animated: true)
-        } catch
+         do {
+            
+            try fakeText.write(to: url, atomically: true, encoding: String.Encoding.utf8)
+            docController = UIDocumentInteractionController(url: url)
+            docController!.delegate = self;
+            docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
+//            docController!.presentOpenInMenu(from: rect, in: self.view, animated: true)
+        }
+        catch
         {
             print(error)
             return
