@@ -321,11 +321,18 @@ class ViewController:
         //
         let documentsPath:String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         cleanoutOldFiles()
-        sharedFilePath = documentsPath + "/fit2fake.txt"
+        let df = DateFormatter()
+        df.dateFormat = "MMM dd,yyyy HH:mm:ss"
+        let stamp = df.string(from: Date())
+        df.dateFormat = "MMddyy-HHmmss"
+        let stampNoSpace = df.string(from: Date())
+// ths is so we can save them as separate documents in a file system.
+        sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).txt"
         let url = URL(fileURLWithPath: sharedFilePath)
 
         // save out that text
-        let fakeText:String = txv_fakeNews.text;
+
+        let fakeText:String = "All The News That's Fit To Fake on \(stamp)\n \(txv_fakeNews.text)";
          do {
             
             try fakeText.write(to: url, atomically: true, encoding: String.Encoding.utf8)
