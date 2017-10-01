@@ -34,7 +34,8 @@ class ViewController:
     @IBOutlet var tv_bylines:UITableView!
     @IBOutlet var txv_fakeNews:UITextView!
     @IBOutlet var sl_gensize:UISlider!
-    @IBOutlet var bt_share:UIButton!
+    @IBOutlet var bt_shareTxt:UIButton!
+    @IBOutlet var bt_sharePic:UIButton!
     @IBOutlet var bt_speak:UIButton!
 
     public var dataSourceSections:[String]?
@@ -45,11 +46,13 @@ class ViewController:
     
     let nytManager:NYTManager = NYTManager()
     let speaker = AVSpeechSynthesizer()
-    var talkAllTheTime = false;
+    var talkAllTheTime = false
     var docController: UIDocumentInteractionController?
-
+    var saveAsImage:Bool = true
+    
     let evenColor = UIColor(red:0.99,green:0.96,blue:0.84,alpha:1.0)
-    let oddColor = UIColor(red:0.90,green:0.96,blue:0.98,alpha:1.0)
+    let oddColor = UIColor(red:0.99,green:0.98,blue:0.99,alpha:1.0)
+    let pageColor = UIColor(red:0.994,green:0.962,blue:0.846,alpha:1.0)
     let normalColor = UIColor(white:1.0, alpha:0.0)
     let selectedColor = UIColor(white:0.0, alpha:0.1)
     
@@ -60,7 +63,6 @@ class ViewController:
         generationSentenceSize = 150
         currentSection = "Choose A Section"
         sharedFilePath=""
-        
         super.init(coder:aDecoder)
     }
     
@@ -70,6 +72,8 @@ class ViewController:
         super.viewDidLoad()
 // we should have speaker by now.
         speaker.delegate = self
+        bt_shareTxt.titleLabel?.numberOfLines=2
+        bt_sharePic.titleLabel?.numberOfLines=2
 
         // Do any additional setup after loading the view, typically from a nib.
         dataSourceSections = self.nytManager.sections
@@ -306,45 +310,76 @@ class ViewController:
     
     // MARK: - Document sharing: doesn't work too well for some reason.
     
-    @IBAction func act_share(_ button: UIButton)
+    @IBAction func act_shareText(_ button: UIButton)
     {
         //        let rect = button.convert(button.frame, to: self.view)
         var rect = button.frame
         rect.origin.y = rect.origin.y + (button.superview?.frame.origin.y)!
-        //        var rect = button.frame
-        //        rect.origin.y=40.0
+        saveAsImage=false;
         share(rect)
     }
-    
+    @IBAction func act_sharePic(_ button: UIButton)
+    {
+        //        let rect = button.convert(button.frame, to: self.view)
+        var rect = button.frame
+        rect.origin.y = rect.origin.y + (button.superview?.frame.origin.y)!
+        saveAsImage=true
+        share(rect)
+    }
     public func share(_ rect:CGRect)
     {
         //
         let documentsPath:String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         cleanoutOldFiles()
+        
         let df = DateFormatter()
         df.dateFormat = "MMM dd,yyyy HH:mm:ss"
         let stamp = df.string(from: Date())
         df.dateFormat = "MMddyy-HHmmss"
         let stampNoSpace = df.string(from: Date())
-// ths is so we can save them as separate documents in a file system.
-        sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).txt"
-        let url = URL(fileURLWithPath: sharedFilePath)
+        let realText = txv_fakeNews.text ?? ""
+        let fakeText:String = "All The News That's Fit To Fake on \(stamp)\n \(realText)";
 
-        // save out that text
-
-        let fakeText:String = "All The News That's Fit To Fake on \(stamp)\n \(txv_fakeNews.text)";
-         do {
-            
-            try fakeText.write(to: url, atomically: true, encoding: String.Encoding.utf8)
-            docController = UIDocumentInteractionController(url: url)
-            docController!.delegate = self;
-            docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
-//            docController!.presentOpenInMenu(from: rect, in: self.view, animated: true)
-        }
-        catch
+        if(saveAsImage)
         {
-            print(error)
-            return
+            sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).jpg"
+            let url = URL(fileURLWithPath: sharedFilePath)
+
+            let textSize = CGSize(width:600.0,height:400.0)
+            let theImage = self.imageFromText(fakeText, size: textSize)
+            if writeImageToFile(image: theImage!,file: sharedFilePath)
+            {
+                docController = UIDocumentInteractionController(url: url)
+                docController!.delegate = self;
+                docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
+            }
+            else
+            {
+                print("some problem writing image to file")
+            }
+
+        }
+        else
+        {
+            // ths is so we can save them as separate documents in a file system.
+            sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).txt"
+            let url = URL(fileURLWithPath: sharedFilePath)
+            
+            // save out that text
+            
+            do {
+                
+                try fakeText.write(to: url, atomically: true, encoding: String.Encoding.utf8)
+                docController = UIDocumentInteractionController(url: url)
+                docController!.delegate = self;
+                docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
+                //            docController!.presentOpenInMenu(from: rect, in: self.view, animated: true)
+            }
+            catch
+            {
+                print(error)
+                return
+            }
         }
     }
     
@@ -405,6 +440,78 @@ class ViewController:
       func documentInteractionController(_ controller: UIDocumentInteractionController, didEndSendingToApplication application: String?)
     {
         
+    }
+    
+    // MARK: image Utils
+    
+    func writeTextAsImage(text:String, file filePath:String, size sizing:CGSize) ->URL?
+    {
+        let theImage =  self.imageFromText(text, size: sizing)
+        
+        let success =   self.writeImageToFile(image:theImage!, file:filePath)
+        if(success)
+        {
+            return URL(fileURLWithPath: filePath)
+        }
+        return nil
+    }
+    
+    private func imageFromText(_ text:String, size sizing:CGSize) -> UIImage!
+    {
+        
+        //        let _textFont = UIFont.systemFont(ofSize: 16)
+        let _textFont = UIFont.init(name: "Times New Roman", size: 16.0)
+        let _textColor = UIColor.black
+        // Setup the image context using the passed image
+        let scale = UIScreen.main.scale
+        let attributes = [
+            NSAttributedStringKey.font: _textFont!,
+            NSAttributedStringKey.foregroundColor: _textColor,
+            ]
+        let superSize = CGSize(width:sizing.width,height:100000.0)
+        let niceRect = text.boundingRect(with: superSize, options: [NSStringDrawingOptions.usesLineFragmentOrigin ], attributes: attributes, context: nil)
+        let niceSize=CGSize(width: 8.0*floor((niceRect.size.width/8.0)+1.0), height: 20.0*floor((niceRect.size.height/20.0)+1.0))
+        UIGraphicsBeginImageContextWithOptions(niceSize, false, scale)
+        
+        let atPoint=CGPoint(x:0.0, y:0.0)
+        
+        // Create a point within the space that is as big as the image
+        let rect = CGRect(origin:atPoint, size:niceSize)
+        // color the page nicely
+        pageColor.setFill()
+        //set the desired background color
+        UIRectFill(CGRect(x:0.0,y:0.0,width:niceSize.width,height:niceSize.height))
+        
+        // Draw the text into an image
+        text.draw(in: rect, withAttributes:  [
+            NSAttributedStringKey.font: _textFont!,
+            NSAttributedStringKey.foregroundColor: _textColor,
+            ])
+
+        // Create a new image out of the images we have created
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // End the context now that we have the image we need
+        UIGraphicsEndImageContext()
+        
+        //Pass the image back up to the caller
+        return newImage
+    }
+    
+    private func writeImageToFile(image:UIImage, file:String) -> Bool
+    {
+        let imageURL:URL = URL(fileURLWithPath: file)
+        let photoData:Data = UIImageJPEGRepresentation(image, 1)!
+        do
+        {
+            try photoData.write(to: imageURL)
+            return true
+        }
+        catch
+        {
+            print("bad image write")
+        }
+        return false
     }
     
 }
