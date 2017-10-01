@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina3_5" orientation="landscape">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -22,14 +22,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TimesTable" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0Xd-2s-58y">
-                                <rect key="frame" x="20" y="20" width="440" height="280"/>
+                                <rect key="frame" x="20" y="40" width="280" height="420"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6WU-1X-78Z">
-                                        <rect key="frame" x="0.0" y="0.0" width="440" height="140"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="140"/>
                                         <color key="backgroundColor" red="0.99432463882292055" green="0.96209532216106664" blue="0.84557394653744089" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="140" id="8o4-sI-ivC"/>
@@ -41,7 +41,7 @@
                                         </connections>
                                     </textView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7xn-45-wLi">
-                                        <rect key="frame" x="0.0" y="144" width="440" height="80"/>
+                                        <rect key="frame" x="0.0" y="144" width="280" height="80"/>
                                         <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="af1-cx-G3Q"/>
@@ -85,32 +85,38 @@
                                         </connections>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hBT-ZQ-Jsm">
-                                        <rect key="frame" x="0.0" y="228" width="440" height="32"/>
+                                        <rect key="frame" x="0.0" y="228" width="280" height="32"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jfz-T2-QSC">
-                                                <rect key="frame" x="0.0" y="0.0" width="85" height="32"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="53" height="32"/>
                                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
                                                 <state key="normal" title="FAKE IT">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="10"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="act_fakeIt" destination="BYZ-38-t0r" eventType="touchUpInside" id="MTp-mc-ZcL"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kev-RB-mEP">
-                                                <rect key="frame" x="89" y="0.0" width="84.5" height="32"/>
+                                                <rect key="frame" x="57" y="0.0" width="52.5" height="32"/>
                                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
                                                 <state key="normal" title="FORGET">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="10"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="act_forgetIt" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mbd-dw-wZy"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XP7-5R-d5j">
-                                                <rect key="frame" x="177.5" y="0.0" width="85" height="32"/>
+                                                <rect key="frame" x="113.5" y="0.0" width="53" height="32"/>
                                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -123,28 +129,37 @@
                                                 <state key="highlighted">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="10"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="act_speak:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jL3-d9-S4D"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piZ-6b-UZE">
-                                                <rect key="frame" x="266.5" y="0.0" width="84.5" height="32"/>
+                                                <rect key="frame" x="170.5" y="0.0" width="52.5" height="32"/>
                                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
                                                 <state key="normal" title="SHARE: text">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="9"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="act_shareText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TSA-86-CeH"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dh7-MN-iF1">
-                                                <rect key="frame" x="355" y="0.0" width="85" height="32"/>
+                                                <rect key="frame" x="227" y="0.0" width="53" height="32"/>
                                                 <color key="backgroundColor" red="0.99432463879999999" green="0.96209532220000005" blue="0.84557394649999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="13"/>
                                                 <state key="normal" title="SHARE: jpg">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="widthClass=compact">
+                                                    <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="9"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="act_sharePic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n1v-fd-XoL"/>
                                                 </connections>
@@ -155,18 +170,18 @@
                                         </constraints>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ajn-7g-jOc">
-                                        <rect key="frame" x="0.0" y="264" width="440" height="16"/>
+                                        <rect key="frame" x="0.0" y="264" width="280" height="156"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoCell" id="xZh-cK-J0F" customClass="InfoCell" customModule="TimesTable" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="440" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoCell" id="xZh-cK-J0F" customClass="InfoCell" customModule="TimesTable" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="280" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xZh-cK-J0F" id="uwx-jG-kcb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="440" height="44.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzL-0A-Fyj">
-                                                            <rect key="frame" x="0.0" y="0.0" width="440" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                                             <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
