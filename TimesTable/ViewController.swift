@@ -49,7 +49,8 @@ class ViewController:
     var talkAllTheTime = false
     var docController: UIDocumentInteractionController?
     var saveAsImage:Bool = true
-    
+    var saveAsJPEGImage:Bool=false
+
     let evenColor = UIColor(red:0.99,green:0.96,blue:0.84,alpha:1.0)
     let oddColor = UIColor(red:0.99,green:0.98,blue:0.99,alpha:1.0)
     let pageColor = UIColor(red:0.994,green:0.962,blue:0.846,alpha:1.0)
@@ -73,6 +74,14 @@ class ViewController:
 // we should have speaker by now.
         speaker.delegate = self
         bt_shareTxt.titleLabel?.numberOfLines=2
+        if saveAsJPEGImage
+        {
+            bt_sharePic.setTitle("SHARE: jpg", for: .normal)
+        }
+        else
+        {
+            bt_sharePic.setTitle("SHARE: png", for: .normal)
+        }
         bt_sharePic.titleLabel?.numberOfLines=2
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -342,20 +351,39 @@ class ViewController:
 
         if(saveAsImage)
         {
-            sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).jpg"
-            let url = URL(fileURLWithPath: sharedFilePath)
-
             let textSize = CGSize(width:600.0,height:400.0)
             let theImage = self.imageFromText(fakeText, size: textSize)
-            if writeImageToFile(image: theImage!,file: sharedFilePath)
+            if(saveAsJPEGImage)
             {
-                docController = UIDocumentInteractionController(url: url)
-                docController!.delegate = self;
-                docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
+                sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).jpg"
+                let url = URL(fileURLWithPath: sharedFilePath)
+                
+                if writeJPEGImageToFile(image: theImage!,file: sharedFilePath)
+                {
+                    docController = UIDocumentInteractionController(url: url)
+                    docController!.delegate = self;
+                    docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
+                }
+                else
+                {
+                    print("some problem writing image to file")
+                }
             }
             else
             {
-                print("some problem writing image to file")
+                sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).png"
+                let url = URL(fileURLWithPath: sharedFilePath)
+                
+                if writePNGImageToFile(image: theImage!,file: sharedFilePath)
+                {
+                    docController = UIDocumentInteractionController(url: url)
+                    docController!.delegate = self;
+                    docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
+                }
+                else
+                {
+                    print("some problem writing image to file")
+                }
             }
 
         }
@@ -444,18 +472,6 @@ class ViewController:
     
     // MARK: image Utils
     
-    func writeTextAsImage(text:String, file filePath:String, size sizing:CGSize) ->URL?
-    {
-        let theImage =  self.imageFromText(text, size: sizing)
-        
-        let success =   self.writeImageToFile(image:theImage!, file:filePath)
-        if(success)
-        {
-            return URL(fileURLWithPath: filePath)
-        }
-        return nil
-    }
-    
     private func imageFromText(_ text:String, size sizing:CGSize) -> UIImage!
     {
         
@@ -498,7 +514,7 @@ class ViewController:
         return newImage
     }
     
-    private func writeImageToFile(image:UIImage, file:String) -> Bool
+    private func writeJPEGImageToFile(image:UIImage, file:String) -> Bool
     {
         let imageURL:URL = URL(fileURLWithPath: file)
         let photoData:Data = UIImageJPEGRepresentation(image, 1)!
@@ -514,5 +530,20 @@ class ViewController:
         return false
     }
     
+    private func writePNGImageToFile(image:UIImage, file:String) -> Bool
+    {
+        let imageURL:URL = URL(fileURLWithPath: file)
+        let photoData:Data = UIImagePNGRepresentation(image)!
+        do
+        {
+            try photoData.write(to: imageURL)
+            return true
+        }
+        catch
+        {
+            print("bad image write")
+        }
+        return false
+    }
 }
 
