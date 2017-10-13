@@ -41,7 +41,7 @@ class NLPManager: NSObject {
                     //                lastWasSpace=true
                 // these guys link back to the anchor
                     
-                    // becuse comma and period can both be in a number... check with an re first. before "."
+                    // because comma and period can both be in a number... check with an re first. before "."
                 case  ",",":" ,";","\"","'":
                     do {
                         // , might be in a number
@@ -140,6 +140,8 @@ class NLPManager: NSObject {
         "'t":"@t",
         "'nt":"@nt",
         "'ll":"@ll",
+        "it's":"it@s",
+        "that's":"that@s",
     ]
     static let filterBackDict:[String:String] = [
         "Mr@":"Mr.",
@@ -169,6 +171,8 @@ class NLPManager: NSObject {
         "@t":"'t",
         "@nt":"'nt",
         "@ll":"'ll",
+        "it@s":"it's",
+        "that@s":"that's"
     ]
     
     func filterDots(_ s:String) ->String
@@ -189,5 +193,22 @@ class NLPManager: NSObject {
             t = t.replacingOccurrences(of: inWord, with: outWord)
         }
         return t
+    }
+    
+    /// take excess spaces out of the computed string
+    ///
+    /// - Parameter s: incoming
+    func smoosh(_ s:String) -> String
+    {
+        var result:String = s
+        result = result.replacingOccurrences(of: " .", with: ".")
+        result = result.replacingOccurrences(of: " ?", with: "?")
+        result = result.replacingOccurrences(of: " !", with: "!")
+        result = result.replacingOccurrences(of: " :", with: ":")
+        result = result.replacingOccurrences(of: " ;", with: ";")
+        result = result.replacingOccurrences(of: " \"", with: "\"")
+        result = result.replacingOccurrences(of: " ,", with: ",")
+        result = result.replacingOccurrences(of: " 's ", with: "'s ")
+        return result
     }
 }

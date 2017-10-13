@@ -240,7 +240,8 @@ class ViewController:
     {
         let shared = SharedGrammar.sharedInstance;
         let generated = shared.generate(self.generationSentenceSize)
-        self.txv_fakeNews.text = generated
+        let nlpMan = NLPManager()
+        self.txv_fakeNews.text = nlpMan.smoosh(generated)
         if(talkAllTheTime)
         {
             speak_start()

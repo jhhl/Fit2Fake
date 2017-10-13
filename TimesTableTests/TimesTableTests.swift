@@ -34,6 +34,16 @@ class TimesTableTests: XCTestCase {
         let nlpMan = NLPManager()
         var result:[String]?
         
+        
+        result = nlpMan.tokenify("This is it's best")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 4,"parsed wrong number, got:\(result!.count)")
+        
+        result = nlpMan.tokenify("This is fred's best")
+        XCTAssert(result != nil,"no result")
+        XCTAssert(result!.count == 5,"parsed wrong number, got:\(result!.count)")
+        
+        
         result = nlpMan.tokenify("This is a simple String.")
         XCTAssert(result != nil,"no result")
         XCTAssert(result!.count == 7,"parsed wrong number, got:\(result!.count)")
@@ -66,7 +76,19 @@ class TimesTableTests: XCTestCase {
         XCTAssert(result != nil,"no result")
         XCTAssert(result!.count == 4,"parsed wrong number, got:\(result!.count)")
     }
-    
+    func testSmoosh()
+    {
+        let nlpMan = NLPManager()
+        var result:String?
+        
+        result = nlpMan.smoosh("a , b")
+        XCTAssert(result == "a, b","bad, got:\(String(describing: result))")
+        
+        result = nlpMan.smoosh("fred 's a dog")
+        XCTAssert(result == "fred's a dog","bad, got:\(String(describing: result))")
+        result = nlpMan.smoosh("end .")
+        XCTAssert(result == "end.","bad, got:\(String(describing: result))")
+    }
     func testEnroll()
     {
         let nlpMan = NLPManager()
