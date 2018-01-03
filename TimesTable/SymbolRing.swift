@@ -11,14 +11,18 @@ import UIKit
 
 /// This is the place where a piece of dictionary is kept.
 // linking is through the uuids, though.
+// these symbols might get reinterpreted though.
 
 class Vocabulary:NSObject
 {
     var symbol: String = ""
-    var uuid: TimeInterval = 0.0
-    var seenCount: UInt = 0
+    var uuid: UInt = 0
     
-    init(symbol sym: String, uuid uuidx: TimeInterval)
+    var seenCount: UInt = 0
+    // eventually, this will tell the leaves from higher structures.
+    var level: UInt = 0
+    
+    init(symbol sym: String, uuid uuidx: UInt)
     {
         self.uuid=uuidx
         self.symbol=sym
@@ -33,11 +37,11 @@ class Vocabulary:NSObject
 
 class SymbolRing: NSObject
 {
-    public var uuid:TimeInterval!
+    public var uuid:UInt!
     public var ring:[SymbolRing]!
     
     override init() {
-        uuid  = Date.timeIntervalSinceReferenceDate
+        uuid  = 0
         ring=[SymbolRing]()
         super.init()
     }
@@ -50,14 +54,16 @@ class SharedGrammar {
     public var rings:[SymbolRing]
     public var anchor:SymbolRing
     public var cursor:SymbolRing
+    public var serialNumber:UInt
     
     private init() {
         
         symbols = []
         rings = []
-        
+        serialNumber = 100000
         // build the anchor
-        let voc = Vocabulary(symbol: " ", uuid: Date.timeIntervalSinceReferenceDate)
+        let voc = Vocabulary(symbol: " ", uuid: serialNumber)
+        serialNumber += 1
         symbols.append(voc)
         
         // this assigns the anchor to this voc's uuid
@@ -73,7 +79,9 @@ class SharedGrammar {
     public func buildAnchor()
     {
         // build the anchor
-        let voc = Vocabulary(symbol: " ", uuid: Date.timeIntervalSinceReferenceDate)
+        let voc = Vocabulary(symbol: " ", uuid: serialNumber)
+        serialNumber += 1
+
         symbols.append(voc)
         
         // this assigns the anchor to this voc's uuid
@@ -148,6 +156,7 @@ class SharedGrammar {
     ///
     /// - Parameter newSymbol:
     /// - Returns: a nice Vocabulary, new or old.
+    // it wouldn't kill me to have this be a method of the singleton and not a class function
     
     public class func getVocabulary(_ newSymbol:String) -> Vocabulary!
     {
@@ -155,14 +164,15 @@ class SharedGrammar {
         if(voc == nil)
         {
             // must allocate one!
-            voc = Vocabulary(symbol: newSymbol, uuid: Date.timeIntervalSinceReferenceDate)
+            voc = Vocabulary(symbol: newSymbol, uuid: sharedInstance.serialNumber)
+            sharedInstance.serialNumber += 1
             let shared  = SharedGrammar.sharedInstance;
             shared.symbols.append(voc!)
         }
         return voc!
     }
     
-    public class func lookupRingUUID(_ uuid:TimeInterval) ->SymbolRing?
+    public class func lookupRingUUID(_ uuid:UInt) ->SymbolRing?
     {
         let shared = SharedGrammar.sharedInstance;
         for(sr) in shared.rings
@@ -175,7 +185,7 @@ class SharedGrammar {
         return nil
     }
     
-    public class func getFreshSymRing(_ uuid:TimeInterval) -> SymbolRing!
+    public class func getFreshSymRing(_ uuid:UInt) -> SymbolRing!
     {
         var symR = lookupRingUUID(uuid)
         if(symR == nil)
@@ -189,21 +199,66 @@ class SharedGrammar {
         return symR!
     }
     
-    public func symbolForUUID(_ uuid:TimeInterval) -> String?
+    public func symbolForUUID(_ uuid:UInt) -> String?
+    {
+        let voc = vocabForUUID(uuid)
+        if voc != nil
+        {
+            return voc?.symbol
+        }
+        return nil
+    }
+    
+    public func vocabForUUID(_ uuid:UInt) -> Vocabulary?
     {
         for(voc) in SharedGrammar.sharedInstance.symbols
         {
             if(voc.uuid == uuid)
             {
-                return voc.symbol
+                return voc
             }
         }
-        
         return nil
     }
     
+    public func pickSmartRandSymRing(_ ring:[SymbolRing]) -> SymbolRing?
+    {
+        // if there isnt a ring.
+        if ring.count == 0
+        {
+            return nil
+        }
+        // this could be precalculated when seen is incremented.
+        var sum: Double  = 0.0
+        let K = 10000.0
+        for sr in ring
+        {
+            let v = vocabForUUID(sr.uuid)!
+            sum += K/(Double(v.seenCount) + 1.0)
+        }
+        // we now have a range for the randomness!
+        //       1;6   2;4 3;3  1;6      c     sum = 19 (/12)
+        //    |......|....|...|......|  ;[12*]  1/(1+c)
+        //                      ^
+        //
+        let  r00000 = sum*Double(arc4random())/Double(0xFFFFFFFF)
+         var sofar: Double  = 0.0
+
+        for sr in ring
+        {
+            let v = vocabForUUID(sr.uuid)!
+            sofar += K/(Double(v.seenCount) + 1.0)
+            if sofar > r00000
+            {
+               return sr
+            }
+        }
+        // shouldn't get there
+        return ring[ring.count-1]
+    }
     public func generate(_ howMany:UInt) -> String
     {
+    
         if anchor.ring.count < 1
         {
             return "Not enough words yet"
@@ -219,9 +274,10 @@ class SharedGrammar {
             // this will get smarter and use the counter (inversely) to weigh the choices.
             //   a larger weight means a smaller chance.
             // also, it will inc  the counter when chosen.
-            let nextIx = Int(arc4random()) %  spot.ring.count
-            
-            spot = spot.ring[nextIx]
+//            let nextIx = Int(arc4random()) %  spot.ring.count
+//
+//            spot = spot.ring[nextIx]
+            spot = pickSmartRandSymRing(spot.ring)!
             // don't stick those spaces in or count them .
             if spot != anchor
             {

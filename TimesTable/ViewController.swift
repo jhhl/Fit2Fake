@@ -48,6 +48,7 @@ class ViewController:
     let speaker = AVSpeechSynthesizer()
     var talkAllTheTime = false
     var docController: UIDocumentInteractionController?
+    var activityController: UIActivityViewController?
     var saveAsImage:Bool = true
     var saveAsJPEGImage:Bool=false
 
@@ -390,25 +391,12 @@ class ViewController:
         }
         else
         {
-            // ths is so we can save them as separate documents in a file system.
-            sharedFilePath = documentsPath + "/fit2fake\(stampNoSpace).txt"
-            let url = URL(fileURLWithPath: sharedFilePath)
             
-            // save out that text
-            
-            do {
-                
-                try fakeText.write(to: url, atomically: true, encoding: String.Encoding.utf8)
-                docController = UIDocumentInteractionController(url: url)
-                docController!.delegate = self;
-                docController!.presentOptionsMenu(from: rect, in: self.view, animated: true)
-                //            docController!.presentOpenInMenu(from: rect, in: self.view, animated: true)
-            }
-            catch
-            {
-                print(error)
-                return
-            }
+            activityController = UIActivityViewController(activityItems: [fakeText], applicationActivities: nil);
+            activityController?.popoverPresentationController?.sourceView = self.view
+            // send that text to an activity
+            self.present(activityController!, animated: true, completion: nil)
+ 
         }
     }
     

@@ -5,6 +5,8 @@
 //  Created by Henry Lowengard on 9/27/17.
 //  Copyright © 2017 Jhhl.net. All rights reserved.
 //
+// the idea is to get the raw character stream into workable tokens.
+//
 
 import UIKit
 
@@ -21,7 +23,7 @@ class NLPManager: NSObject {
         var word = ""
         var words:[String] = [String]()
         let filteredSentence = filterDots(sentence)
-        // thsi is because NSRegexx throws, inconveniently
+        // this is because NSRegexx throws, inconveniently
         do
         {
 //            let reNiceNumber = try  NSRegularExpression(pattern: "^[+-$]*[01234567890,]*([.][01234567890])*$")
