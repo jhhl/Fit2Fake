@@ -349,7 +349,7 @@ class ViewController:
         df.dateFormat = "MMddyy-HHmmss"
         let stampNoSpace = df.string(from: Date())
         let realText = txv_fakeNews.text ?? ""
-        let fakeText:String = "All The News That's Fit To Fake on \(stamp)\n \(realText)";
+        let fakeText:String = "All The News That's Fit To Fake on \(stamp)\n \(realText)\n";
 
         if(saveAsImage)
         {
