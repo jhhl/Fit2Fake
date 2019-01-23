@@ -228,6 +228,11 @@ class SharedGrammar {
         {
             return nil
         }
+        // don't waste time ..
+        if ring.count == 1
+        {
+            return ring[0]
+        }
         // this could be precalculated when seen is incremented.
         var sum: Double  = 0.0
         let K = 10000.0
@@ -277,12 +282,19 @@ class SharedGrammar {
 //            let nextIx = Int(arc4random()) %  spot.ring.count
 //
 //            spot = spot.ring[nextIx]
+            // debug just for fun ...
+//            let addADash =  spot.ring.count == 1
+            
             spot = pickSmartRandSymRing(spot.ring)!
             // don't stick those spaces in or count them .
             if spot != anchor
             {
                 let spotSym = symbolForUUID(spot.uuid)!
                 result = "\(result) \(spotSym)"
+//                    if addADash
+//                    {
+//                        result = "\(result)_"
+//                    }
                 countdown = countdown-1
             }
             // stop at the end of a sentence unless we didn't really gen anything

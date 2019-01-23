@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FitToFakeExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>TimesTable.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>70B3BE9D1F7AAA4200DBA39D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>70B836DF2127D82100719887</key>
 		<dict>
 			<key>primary</key>
 			<true/>

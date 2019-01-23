@@ -223,6 +223,8 @@ class ViewController:
     }
     // MARK: - disable typing into the text view
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        //  generate fakeness though!
+        generateFake()
         return false
     }
     
@@ -242,13 +244,29 @@ class ViewController:
         let shared = SharedGrammar.sharedInstance;
         let generated = shared.generate(self.generationSentenceSize)
         let nlpMan = NLPManager()
-        self.txv_fakeNews.text = nlpMan.smoosh(generated)
-        if(talkAllTheTime)
-        {
-            speak_start()
+        //TODO: animate this?
+        UIView.animate(withDuration: 0.25, animations: {
+            self.txv_fakeNews.alpha = 0.0;
+        }) { (Bool) in
+             self.txv_fakeNews.text = nlpMan.smoosh(generated)
+            UIView.animate(withDuration: 0.25, animations: {
+                self.txv_fakeNews.alpha = 1.0;
+            }) { (Bool) in
+                if(self.talkAllTheTime)
+                {
+                    self.speak_start()
+                }
+            }
         }
+        //
+//        self.txv_fakeNews.text = nlpMan.smoosh(generated)
+//        if(talkAllTheTime)
+//        {
+//            speak_start()
+//        }
     }
     
+    // no longer need a separate button.
     @IBAction func act_fakeIt()
     {
       generateFake()
@@ -268,7 +286,8 @@ class ViewController:
         txv_fakeNews.text = "All the News That's Fit To Fake"
         speak_stop()
     }
-
+    
+//MARK:  -Speaking
     @IBAction func act_speak(_ button: UIButton)
     {
         button.isSelected = !button.isSelected
@@ -302,7 +321,7 @@ class ViewController:
         speaker.stopSpeaking(at: AVSpeechBoundary.word)
     }
     
-    // delegate methods for speaker
+//MARK: - delegate methods for speaker
      func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance)
      {
     }
