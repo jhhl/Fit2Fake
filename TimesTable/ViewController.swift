@@ -17,6 +17,7 @@ class SectionCell:UICollectionViewCell
 class InfoCell : UITableViewCell
 {
     @IBOutlet var lb_text:UILabel?
+    @IBOutlet var iv_view:UIImageView?
 }
 
 class ViewController:
@@ -44,9 +45,10 @@ class ViewController:
     public var generationSentenceSize:UInt
     var sharedFilePath:String
     
-    let nytManager:NYTManager = NYTManager()
+//    let nytManager:NYTManager = NYTManager()
+    let corpusManager:CorpusManager = CorpusManager()
     let speaker = AVSpeechSynthesizer()
-    var talkAllTheTime = false
+    var speakTheNews = false
     var docController: UIDocumentInteractionController?
     var activityController: UIActivityViewController?
     var saveAsImage:Bool = true
@@ -55,8 +57,13 @@ class ViewController:
     let evenColor = UIColor(red:0.99,green:0.96,blue:0.84,alpha:1.0)
     let oddColor = UIColor(red:0.99,green:0.98,blue:0.99,alpha:1.0)
     let pageColor = UIColor(red:0.994,green:0.962,blue:0.846,alpha:1.0)
+
+//    let evenColor = UIColor(patternImage: UIImage(named: "newsprint0")!)
+//    let oddColor = UIColor(patternImage: UIImage(named: "newsprint1")!)
     let normalColor = UIColor(white:1.0, alpha:0.0)
     let selectedColor = UIColor(white:0.0, alpha:0.1)
+    
+    var continuousSpeech:Bool = false;
     
     // MARK: - initializing and other setup
 
@@ -84,9 +91,10 @@ class ViewController:
             bt_sharePic.setTitle("SHARE: png", for: .normal)
         }
         bt_sharePic.titleLabel?.numberOfLines=2
-
+        self.corpusManager.getSectionMap()
         // Do any additional setup after loading the view, typically from a nib.
-        dataSourceSections = self.nytManager.sections
+//        dataSourceSections = self.nytManager.sections
+        dataSourceSections = Array(self.corpusManager.sectionMap.keys).sorted()
         dataSource = ["Choose a Section, will ya?"] // will be filled by section query
         txv_fakeNews.text = "All the News That's Fit To Fake"
         setupCollectionView()
@@ -145,6 +153,10 @@ class ViewController:
         let cell:SectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SectionCell",
                                                                   for: indexPath) as! SectionCell
         cell.lb_text!.text=dataSourceSections![indexPath.row]
+//        cell.lb_text!.numberOfLines=2
+//        cell.lb_text!.adjustsFontSizeToFitWidth=true
+//        cell.lb_text!.minimumScaleFactor=0.5
+        
         if (cell.lb_text!.text?.isEqual(currentSection))!
         {
             cell.backgroundColor=selectedColor
@@ -169,17 +181,18 @@ class ViewController:
         collectionView.reloadData() // re-renders the cell backgrounds
         // now we can perform the query that fills the table...
         DispatchQueue.global(qos: .userInitiated).async {
-            if((self.nytManager.getJSON(section: self.currentSection)) != nil)
+//            if((self.nytManager.getJSON(section: self.currentSection)) != nil)
+            if((self.corpusManager.getJSON(section: self.currentSection)) != nil)
             {
-                self.dataSource = self.nytManager.recordsFor(key: "abstract")
+//                self.dataSource = self.nytManager.recordsFor(key: "abstract")
+                self.dataSource = self.corpusManager.recordsFor()
                 DispatchQueue.main.async {self.tv_bylines.reloadData()}
             }
         }
-        
     }
 
     
-    // MARK: - table view  delegate and datasource
+// MARK: - table view  delegate and datasource
 
  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
 {
@@ -214,7 +227,9 @@ class ViewController:
         let cell:InfoCell = tableView.dequeueReusableCell(withIdentifier: "InfoCell",for: indexPath) as! InfoCell
         cell.lb_text?.text = dataSource![row]
         cell.lb_text?.numberOfLines=0 // wrap all the time
-        cell.backgroundColor = indexPath.row % 2 == 0 ? evenColor : oddColor;
+//        cell.backgroundColor = indexPath.row % 2 == 0 ? evenColor : oddColor;
+        let eoName:String = indexPath.row % 2 == 0 ? "newsprint2" : "newsprint3";
+        cell.iv_view!.image = UIImage(named: eoName);
         
         var superbounds = tableView.bounds
         superbounds.size.height = 10000.0
@@ -239,7 +254,10 @@ class ViewController:
         shared.enrollSentence( nlpMan.tokenify(sentence))
         generateFake()
     }
-    func generateFake()
+    
+    // marked objc so it can be called by selector
+    //
+    @objc func generateFake()
     {
         let shared = SharedGrammar.sharedInstance;
         let generated = shared.generate(self.generationSentenceSize)
@@ -252,7 +270,7 @@ class ViewController:
             UIView.animate(withDuration: 0.25, animations: {
                 self.txv_fakeNews.alpha = 1.0;
             }) { (Bool) in
-                if(self.talkAllTheTime)
+                if(self.speakTheNews)
                 {
                     self.speak_start()
                 }
@@ -260,7 +278,7 @@ class ViewController:
         }
         //
 //        self.txv_fakeNews.text = nlpMan.smoosh(generated)
-//        if(talkAllTheTime)
+//        if(speakTheNews)
 //        {
 //            speak_start()
 //        }
@@ -284,15 +302,17 @@ class ViewController:
     {
         SharedGrammar.sharedInstance.forget()
         txv_fakeNews.text = "All the News That's Fit To Fake"
+        dataSource = ["Choose a Section, will ya?"] // wipe out and will be filled by section query
+        self.tv_bylines.reloadData()
         speak_stop()
-    }
+     }
     
 //MARK:  -Speaking
     @IBAction func act_speak(_ button: UIButton)
     {
         button.isSelected = !button.isSelected
         
-        talkAllTheTime = button.isSelected
+        speakTheNews = button.isSelected
         if button.isSelected
         {
             speak_start()
@@ -302,6 +322,7 @@ class ViewController:
             speak_stop()
         }
     }
+    
     // this now lets it speak all the time, and then stop doing that.
     
     func speak_start()
@@ -310,15 +331,34 @@ class ViewController:
         {
              speaker.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
-        bt_speak.setTitle( "STOP", for: UIControlState.normal)
+        bt_speak.setTitle( "SILENCE", for: UIControlState.normal)
         let utterance = AVSpeechUtterance(string:txv_fakeNews.text)
         speaker.speak(utterance)
     }
     
     func speak_stop()
     {
-        bt_speak.setTitle( "SPEAK", for: UIControlState.normal)
+        bt_speak.setTitle(continuousSpeech ? "RADIO" : "SPEAK", for: UIControlState.normal)
         speaker.stopSpeaking(at: AVSpeechBoundary.word)
+    }
+    
+    /// long press pass though will toggle continous "radio" mode talking.
+    ///
+    /// - Parameter gestureRecognizer:
+    @IBAction func act_LongPressGestured(_ gestureRecognizer: UILongPressGestureRecognizer)
+    {
+        if gestureRecognizer.state == .began
+        {
+            continuousSpeech = !continuousSpeech
+            if continuousSpeech
+            {
+                speak_start()
+            }
+            else
+            {
+                speak_stop()
+            }
+        }
     }
     
 //MARK: - delegate methods for speaker
@@ -327,6 +367,11 @@ class ViewController:
     }
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance)
     {
+        if continuousSpeech
+        {
+//            let _ = Timer(timeInterval: 0.4, repeats: false) { _ in self.generateFake()}
+            self.perform(#selector(generateFake), with: nil, afterDelay: 0.5)
+        }
     }
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance)
     {

@@ -22,6 +22,7 @@
 		70B836E32127D82200719887 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B836E22127D82200719887 /* IntentHandler.swift */; };
 		70B836E72127D82200719887 /* FitToFakeExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 70B836E02127D82100719887 /* FitToFakeExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		70B836ED2127D91500719887 /* FakeRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B836EC2127D91500719887 /* FakeRequestHandler.swift */; };
+		70C8227222B36D4100E9E3DF /* CorpusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C8227122B36D4000E9E3DF /* CorpusManager.swift */; };
 		70CB05711F7DF5E500486872 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70CB05701F7DF5E500486872 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		70B836E22127D82200719887 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		70B836E42127D82200719887 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70B836EC2127D91500719887 /* FakeRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeRequestHandler.swift; sourceTree = "<group>"; };
+		70C8227122B36D4000E9E3DF /* CorpusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusManager.swift; sourceTree = "<group>"; };
 		70CB056E1F7DF57900486872 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		70CB05701F7DF5E500486872 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				70B836DB2127D80300719887 /* TimesTable.entitlements */,
 				70B3BE8D1F7AAA4200DBA39D /* AppDelegate.swift */,
 				70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */,
+				70C8227122B36D4000E9E3DF /* CorpusManager.swift */,
 				70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */,
 				70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */,
 				70B3BE8F1F7AAA4200DBA39D /* ViewController.swift */,
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70B3BEAE1F7AAA6800DBA39D /* NYTManager.swift in Sources */,
+				70C8227222B36D4100E9E3DF /* CorpusManager.swift in Sources */,
 				70B3BEB91F7C9B9100DBA39D /* SymbolRing.swift in Sources */,
 				70B3BE901F7AAA4200DBA39D /* ViewController.swift in Sources */,
 				70B3BE8E1F7AAA4200DBA39D /* AppDelegate.swift in Sources */,
