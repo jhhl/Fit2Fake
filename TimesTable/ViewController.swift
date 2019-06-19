@@ -32,7 +32,7 @@ class ViewController:
 {
     
     @IBOutlet var cv_sections:UICollectionView!
-    @IBOutlet var tv_bylines:UITableView!
+    @IBOutlet var tv_corpus:UITableView!
     @IBOutlet var txv_fakeNews:UITextView!
     @IBOutlet var sl_gensize:UISlider!
     @IBOutlet var bt_shareTxt:UIButton!
@@ -64,6 +64,7 @@ class ViewController:
     let selectedColor = UIColor(white:0.0, alpha:0.1)
     
     var continuousSpeech:Bool = false;
+    var currentInfo:[Int] = [];
     
     // MARK: - initializing and other setup
 
@@ -156,7 +157,9 @@ class ViewController:
 //        cell.lb_text!.numberOfLines=2
 //        cell.lb_text!.adjustsFontSizeToFitWidth=true
 //        cell.lb_text!.minimumScaleFactor=0.5
-        
+        // this means we have a new bunch of rows, so clear the "current one"
+        self.currentInfo.removeAll()
+
         if (cell.lb_text!.text?.isEqual(currentSection))!
         {
             cell.backgroundColor=selectedColor
@@ -186,7 +189,7 @@ class ViewController:
             {
 //                self.dataSource = self.nytManager.recordsFor(key: "abstract")
                 self.dataSource = self.corpusManager.recordsFor()
-                DispatchQueue.main.async {self.tv_bylines.reloadData()}
+                DispatchQueue.main.async {self.tv_corpus.reloadData()}
             }
         }
     }
@@ -228,7 +231,9 @@ class ViewController:
         cell.lb_text?.text = dataSource![row]
         cell.lb_text?.numberOfLines=0 // wrap all the time
 //        cell.backgroundColor = indexPath.row % 2 == 0 ? evenColor : oddColor;
-        let eoName:String = indexPath.row % 2 == 0 ? "newsprint2" : "newsprint3";
+        let eoName:String = self.currentInfo.contains(indexPath.row) ? "newsprint0" :
+            indexPath.row % 2 == 0 ? "newsprint2" : "newsprint3";
+        
         cell.iv_view!.image = UIImage(named: eoName);
         
         var superbounds = tableView.bounds
@@ -246,7 +251,12 @@ class ViewController:
     // MARK: - actions
     func tableView(_ tableView:UITableView, didSelectRowAt indexPath:IndexPath  )
     {
+        let cell:InfoCell = tableView.cellForRow(at: indexPath) as! InfoCell
+        // show that it's selected ... but when it refreshes, it won't know.
         let row = indexPath.row
+        self.currentInfo.append(row);
+        cell.iv_view!.image = UIImage(named:"newsprint0")
+
         let sentence = dataSource![row]
         // feed it to the generator.
         let nlpMan = NLPManager()
@@ -303,7 +313,9 @@ class ViewController:
         SharedGrammar.sharedInstance.forget()
         txv_fakeNews.text = "All the News That's Fit To Fake"
         dataSource = ["Choose a Section, will ya?"] // wipe out and will be filled by section query
-        self.tv_bylines.reloadData()
+        self.currentInfo.removeAll()
+        self.tv_corpus.reloadData()
+        self.tv_corpus.scrollToNearestSelectedRow(at: .top, animated: true)
         speak_stop()
      }
     

@@ -250,7 +250,7 @@
                         <outlet property="bt_shareTxt" destination="piZ-6b-UZE" id="6fP-cv-fxe"/>
                         <outlet property="bt_speak" destination="XP7-5R-d5j" id="2RB-j6-jXn"/>
                         <outlet property="cv_sections" destination="7xn-45-wLi" id="eEx-DN-dDv"/>
-                        <outlet property="tv_bylines" destination="Ajn-7g-jOc" id="kZE-e7-o5N"/>
+                        <outlet property="tv_corpus" destination="Ajn-7g-jOc" id="kZE-e7-o5N"/>
                         <outlet property="txv_fakeNews" destination="6WU-1X-78Z" id="oXs-aP-bYj"/>
                     </connections>
                 </viewController>
