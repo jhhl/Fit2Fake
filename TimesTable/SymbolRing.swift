@@ -28,9 +28,7 @@ class Vocabulary:NSObject
         self.symbol=sym
         super.init()
     }
-    
 }
-
 
 /// this may grow some more data to match when looking for the next "ring",
 // for instance a sentence ID would mean it was once used in the same sentence as somenting.

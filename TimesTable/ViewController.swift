@@ -45,7 +45,6 @@ class ViewController:
     public var generationSentenceSize:UInt
     var sharedFilePath:String
     
-//    let nytManager:NYTManager = NYTManager()
     let corpusManager:CorpusManager = CorpusManager()
     let speaker = AVSpeechSynthesizer()
     var speakTheNews = false
@@ -94,7 +93,6 @@ class ViewController:
         bt_sharePic.titleLabel?.numberOfLines=2
         self.corpusManager.getSectionMap()
         // Do any additional setup after loading the view, typically from a nib.
-//        dataSourceSections = self.nytManager.sections
         dataSourceSections = Array(self.corpusManager.sectionMap.keys).sorted()
         dataSource = ["Choose a Section, will ya?"] // will be filled by section query
         txv_fakeNews.text = "All the News That's Fit To Fake"
@@ -184,10 +182,8 @@ class ViewController:
         collectionView.reloadData() // re-renders the cell backgrounds
         // now we can perform the query that fills the table...
         DispatchQueue.global(qos: .userInitiated).async {
-//            if((self.nytManager.getJSON(section: self.currentSection)) != nil)
             if((self.corpusManager.getJSON(section: self.currentSection)) != nil)
             {
-//                self.dataSource = self.nytManager.recordsFor(key: "abstract")
                 self.dataSource = self.corpusManager.recordsFor()
                 DispatchQueue.main.async {self.tv_corpus.reloadData()}
             }
@@ -272,11 +268,13 @@ class ViewController:
         let shared = SharedGrammar.sharedInstance;
         let generated = shared.generate(self.generationSentenceSize)
         let nlpMan = NLPManager()
+        let cleanedUp = nlpMan.smoosh(generated)
+        
         //TODO: animate this?
         UIView.animate(withDuration: 0.25, animations: {
             self.txv_fakeNews.alpha = 0.0;
         }) { (Bool) in
-             self.txv_fakeNews.text = nlpMan.smoosh(generated)
+             self.txv_fakeNews.text = cleanedUp
             UIView.animate(withDuration: 0.25, animations: {
                 self.txv_fakeNews.alpha = 1.0;
             }) { (Bool) in

@@ -20,12 +20,12 @@ class TimesTableTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testNYTAPI() {
+
+    func testCorpusManager() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let nytManager = NYTManager();
-        let k:Any? = nytManager.getJSON(section:"obituaries")
+        let corpusManager = CorpusManager();
+        let k:Any? = corpusManager.getJSON(section:"d") // Tweets
         XCTAssert(k != nil,"no value there")
     }
     

@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		704EBA66231A3FB300A50017 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70CB05701F7DF5E500486872 /* AVFoundation.framework */; };
+		707C94A72328AE1D00868951 /* CorpusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C8227122B36D4000E9E3DF /* CorpusManager.swift */; };
+		707C94A82328AE2200868951 /* SymbolRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */; };
+		707C94A92328AE2700868951 /* NLPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */; };
 		70B3BE8E1F7AAA4200DBA39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BE8D1F7AAA4200DBA39D /* AppDelegate.swift */; };
 		70B3BE901F7AAA4200DBA39D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BE8F1F7AAA4200DBA39D /* ViewController.swift */; };
 		70B3BE931F7AAA4200DBA39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B3BE911F7AAA4200DBA39D /* Main.storyboard */; };
 		70B3BE951F7AAA4200DBA39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70B3BE941F7AAA4200DBA39D /* Assets.xcassets */; };
 		70B3BE981F7AAA4200DBA39D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B3BE961F7AAA4200DBA39D /* LaunchScreen.storyboard */; };
 		70B3BEA31F7AAA4200DBA39D /* TimesTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEA21F7AAA4200DBA39D /* TimesTableTests.swift */; };
-		70B3BEAE1F7AAA6800DBA39D /* NYTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */; };
-		70B3BEAF1F7AAA6800DBA39D /* NYTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */; };
 		70B3BEB91F7C9B9100DBA39D /* SymbolRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */; };
 		70B3BEBA1F7C9B9100DBA39D /* SymbolRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */; };
 		70B3BEBC1F7CA45200DBA39D /* NLPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */; };
@@ -68,7 +70,6 @@
 		70B3BE9E1F7AAA4200DBA39D /* TimesTableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimesTableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B3BEA21F7AAA4200DBA39D /* TimesTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesTableTests.swift; sourceTree = "<group>"; };
 		70B3BEA41F7AAA4200DBA39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTManager.swift; sourceTree = "<group>"; };
 		70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolRing.swift; sourceTree = "<group>"; };
 		70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NLPManager.swift; sourceTree = "<group>"; };
 		70B836DB2127D80300719887 /* TimesTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimesTable.entitlements; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				704EBA66231A3FB300A50017 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +135,6 @@
 			children = (
 				70B836DB2127D80300719887 /* TimesTable.entitlements */,
 				70B3BE8D1F7AAA4200DBA39D /* AppDelegate.swift */,
-				70B3BEAD1F7AAA6800DBA39D /* NYTManager.swift */,
 				70C8227122B36D4000E9E3DF /* CorpusManager.swift */,
 				70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */,
 				70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */,
@@ -238,7 +239,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Jhhl.net;
 				TargetAttributes = {
 					70B3BE891F7AAA4200DBA39D = {
@@ -313,7 +314,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70B3BEAE1F7AAA6800DBA39D /* NYTManager.swift in Sources */,
 				70C8227222B36D4100E9E3DF /* CorpusManager.swift in Sources */,
 				70B3BEB91F7C9B9100DBA39D /* SymbolRing.swift in Sources */,
 				70B3BE901F7AAA4200DBA39D /* ViewController.swift in Sources */,
@@ -329,7 +329,6 @@
 				70B3BEBD1F7CA45200DBA39D /* NLPManager.swift in Sources */,
 				70B3BEA31F7AAA4200DBA39D /* TimesTableTests.swift in Sources */,
 				70B3BEBA1F7C9B9100DBA39D /* SymbolRing.swift in Sources */,
-				70B3BEAF1F7AAA6800DBA39D /* NYTManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +337,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				70B836E32127D82200719887 /* IntentHandler.swift in Sources */,
+				707C94A82328AE2200868951 /* SymbolRing.swift in Sources */,
+				707C94A72328AE1D00868951 /* CorpusManager.swift in Sources */,
 				70B836ED2127D91500719887 /* FakeRequestHandler.swift in Sources */,
+				707C94A92328AE2700868951 /* NLPManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +393,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -398,6 +401,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -425,7 +429,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -448,6 +452,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -455,6 +460,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -476,7 +482,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -493,6 +499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 697BLY6WZ3;
 				INFOPLIST_FILE = TimesTable/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.jhhl.Fit2Fake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -510,6 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 697BLY6WZ3;
 				INFOPLIST_FILE = TimesTable/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.jhhl.Fit2Fake;
 				PRODUCT_NAME = "$(TARGET_NAME)";

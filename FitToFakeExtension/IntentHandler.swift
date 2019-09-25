@@ -16,7 +16,11 @@ import Intents
 
 class IntentHandler: INExtension {
     override func handler(for intent: INIntent) -> Any? {
-        if intent is INRequestRideIntent {
+        if intent is INSendMessageIntent {
+            return FakeRequestHandler()
+        }
+        // Find messages from Scott on Fit 2 Fake
+        if intent is INSearchForMessagesIntent {
             return FakeRequestHandler()
         }
         return .none

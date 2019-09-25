@@ -37,5 +37,9 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).IntentHandler</string>
 	</dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>net.jhhl.fit2fake.news</string>
+	</array>
 </dict>
 </plist>

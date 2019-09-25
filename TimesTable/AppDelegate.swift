@@ -44,11 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func requestAuthorisation()
     {
-        INPreferences.requestSiriAuthorization { status in
-            if status == .authorized {
-                print("Hey, Siri!")
-            } else {
-                print("Nay, Siri!")
+        if #available(iOS 10, *) {
+            INPreferences.requestSiriAuthorization { status in
+                if status == .authorized {
+                    print("Hey, Siri!")
+                } else {
+                    print("Nay, Siri!")
+                }
             }
         }
     }
