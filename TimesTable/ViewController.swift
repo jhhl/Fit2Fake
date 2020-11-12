@@ -38,7 +38,8 @@ class ViewController:
     @IBOutlet var bt_shareTxt:UIButton!
     @IBOutlet var bt_sharePic:UIButton!
     @IBOutlet var bt_speak:UIButton!
-
+    @IBOutlet var bt_all:UIButton!
+    
     public var dataSourceSections:[String]?
     public var dataSource:[String]?
     public var currentSection:String
@@ -316,7 +317,29 @@ class ViewController:
         self.tv_corpus.scrollToNearestSelectedRow(at: .top, animated: true)
         speak_stop()
      }
-    
+  @IBAction func act_all()
+  {
+    if dataSource != nil{
+        let dataSrc = dataSource ?? []
+        for row in 0..<dataSrc.count {
+            //                let indexPath: IndexPath =  IndexPath(indexes:[0,iota])
+            //                let cell:InfoCell = tv_corpus.cellForRow(at: indexPath) as! InfoCell
+            // show that it's selected ... but when it refreshes, it won't know.
+            //                let row = indexPath.row
+            self.currentInfo.append(row);
+            //                cell.iv_view!.image = UIImage(named:"newsprint0")
+            
+            let sentence = dataSource![row]
+            // feed it to the generator.
+            let nlpMan = NLPManager()
+            let shared = SharedGrammar.sharedInstance;
+            shared.enrollSentence( nlpMan.tokenify(sentence))
+        }
+        tv_corpus.reloadData()
+        generateFake()
+    }
+    speak_stop()
+  }
 //MARK:  -Speaking
     @IBAction func act_speak(_ button: UIButton)
     {
