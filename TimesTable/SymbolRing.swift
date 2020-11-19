@@ -259,6 +259,7 @@ class SharedGrammar {
         // shouldn't get there
         return ring[ring.count-1]
     }
+    
     public func generate(_ howMany:UInt) -> String
     {
     

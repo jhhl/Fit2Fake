@@ -11,6 +11,7 @@
 		707C94A72328AE1D00868951 /* CorpusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C8227122B36D4000E9E3DF /* CorpusManager.swift */; };
 		707C94A82328AE2200868951 /* SymbolRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEB81F7C9B9100DBA39D /* SymbolRing.swift */; };
 		707C94A92328AE2700868951 /* NLPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BEBB1F7CA45200DBA39D /* NLPManager.swift */; };
+		70A5E7E2255EF0870032E4A7 /* FitToFake.help in Resources */ = {isa = PBXBuildFile; fileRef = 70A5E7E1255EF0870032E4A7 /* FitToFake.help */; };
 		70B3BE8E1F7AAA4200DBA39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BE8D1F7AAA4200DBA39D /* AppDelegate.swift */; };
 		70B3BE901F7AAA4200DBA39D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B3BE8F1F7AAA4200DBA39D /* ViewController.swift */; };
 		70B3BE931F7AAA4200DBA39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70B3BE911F7AAA4200DBA39D /* Main.storyboard */; };
@@ -61,7 +62,8 @@
 
 /* Begin PBXFileReference section */
 		70A5E756255D0E770032E4A7 /* FitToFakeExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitToFakeExtension.entitlements; sourceTree = "<group>"; };
-		70B3BE8A1F7AAA4200DBA39D /* TimesTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimesTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70A5E7E1255EF0870032E4A7 /* FitToFake.help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FitToFake.help; path = TimesTable/FitToFake.help; sourceTree = "<group>"; };
+		70B3BE8A1F7AAA4200DBA39D /* Fit To Fake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fit To Fake.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70B3BE8D1F7AAA4200DBA39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70B3BE8F1F7AAA4200DBA39D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		70B3BE921F7AAA4200DBA39D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		70B3BE811F7AAA4100DBA39D = {
 			isa = PBXGroup;
 			children = (
+				70A5E7E1255EF0870032E4A7 /* FitToFake.help */,
 				70B3BE8C1F7AAA4200DBA39D /* TimesTable */,
 				70B3BEA11F7AAA4200DBA39D /* TimesTableTests */,
 				70B836E12127D82200719887 /* FitToFakeExtension */,
@@ -124,7 +127,7 @@
 		70B3BE8B1F7AAA4200DBA39D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				70B3BE8A1F7AAA4200DBA39D /* TimesTable.app */,
+				70B3BE8A1F7AAA4200DBA39D /* Fit To Fake.app */,
 				70B3BE9E1F7AAA4200DBA39D /* TimesTableTests.xctest */,
 				70B836E02127D82100719887 /* FitToFakeExtension.appex */,
 			);
@@ -180,9 +183,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		70B3BE891F7AAA4200DBA39D /* TimesTable */ = {
+		70B3BE891F7AAA4200DBA39D /* Fit To Fake */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 70B3BEA71F7AAA4200DBA39D /* Build configuration list for PBXNativeTarget "TimesTable" */;
+			buildConfigurationList = 70B3BEA71F7AAA4200DBA39D /* Build configuration list for PBXNativeTarget "Fit To Fake" */;
 			buildPhases = (
 				70B3BE861F7AAA4200DBA39D /* Sources */,
 				70B3BE871F7AAA4200DBA39D /* Frameworks */,
@@ -194,9 +197,9 @@
 			dependencies = (
 				70B836E62127D82200719887 /* PBXTargetDependency */,
 			);
-			name = TimesTable;
+			name = "Fit To Fake";
 			productName = TimesTable;
-			productReference = 70B3BE8A1F7AAA4200DBA39D /* TimesTable.app */;
+			productReference = 70B3BE8A1F7AAA4200DBA39D /* Fit To Fake.app */;
 			productType = "com.apple.product-type.application";
 		};
 		70B3BE9D1F7AAA4200DBA39D /* TimesTableTests */ = {
@@ -277,7 +280,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				70B3BE891F7AAA4200DBA39D /* TimesTable */,
+				70B3BE891F7AAA4200DBA39D /* Fit To Fake */,
 				70B3BE9D1F7AAA4200DBA39D /* TimesTableTests */,
 				70B836DF2127D82100719887 /* FitToFakeExtension */,
 			);
@@ -291,6 +294,7 @@
 			files = (
 				70B3BE981F7AAA4200DBA39D /* LaunchScreen.storyboard in Resources */,
 				70B3BE951F7AAA4200DBA39D /* Assets.xcassets in Resources */,
+				70A5E7E2255EF0870032E4A7 /* FitToFake.help in Resources */,
 				70B3BE931F7AAA4200DBA39D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,7 +355,7 @@
 /* Begin PBXTargetDependency section */
 		70B3BEA01F7AAA4200DBA39D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 70B3BE891F7AAA4200DBA39D /* TimesTable */;
+			target = 70B3BE891F7AAA4200DBA39D /* Fit To Fake */;
 			targetProxy = 70B3BE9F1F7AAA4200DBA39D /* PBXContainerItemProxy */;
 		};
 		70B836E62127D82200719887 /* PBXTargetDependency */ = {
@@ -618,7 +622,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		70B3BEA71F7AAA4200DBA39D /* Build configuration list for PBXNativeTarget "TimesTable" */ = {
+		70B3BEA71F7AAA4200DBA39D /* Build configuration list for PBXNativeTarget "Fit To Fake" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				70B3BEA81F7AAA4200DBA39D /* Debug */,

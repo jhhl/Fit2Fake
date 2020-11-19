@@ -81,6 +81,7 @@ class ViewController:
     {
         super.viewDidLoad()
 // we should have speaker by now.
+        //voiceInventory(); // remove later
         speaker.delegate = self
         bt_shareTxt.titleLabel?.numberOfLines=2
         if saveAsJPEGImage
@@ -100,6 +101,17 @@ class ViewController:
         setupCollectionView()
     }
     
+    /// get a list of installed voices. this might be used to swap them up during utterances.
+    func voiceInventory()
+    {
+        let allVoices =  AVSpeechSynthesisVoice.speechVoices()
+            
+        var index = 0
+        for theVoice in allVoices {
+            print("Voice[\(index)] = \(theVoice)\n")
+            index += 1
+        }
+    }
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -364,7 +376,8 @@ class ViewController:
         {
              speaker.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
-        bt_speak.setTitle( "SILENCE", for: UIControlState.normal)
+        bt_speak.setTitle(continuousSpeech ? "RADIO OFF" : "SILENCE", for: UIControlState.normal)
+
         let utterance = AVSpeechUtterance(string:txv_fakeNews.text)
         speaker.speak(utterance)
     }
@@ -383,14 +396,25 @@ class ViewController:
         if gestureRecognizer.state == .began
         {
             continuousSpeech = !continuousSpeech
-            if continuousSpeech
+            
+            if speaker.isSpeaking
             {
-                speak_start()
+                bt_speak.setTitle(continuousSpeech ? "RADIO OFF" : "SILENCE", for: UIControlState.normal)
             }
             else
             {
-                speak_stop()
+                bt_speak.setTitle(continuousSpeech ? "RADIO" : "SPEAK", for: UIControlState.normal)
+
             }
+            //long press is independent of the "Press" command.
+//            if continuousSpeech
+//            {
+//                speak_start()
+//            }
+//            else
+//            {
+//                speak_stop()
+//            }
         }
     }
     

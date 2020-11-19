@@ -100,7 +100,7 @@ func makeFake(keys: [String]) -> String
     // use the keys to find sections to fake ?
     
     let nlpMan = NLPManager()
-    let shared = SharedGrammar.sharedInstance;
+    let shared = SharedGrammar.sharedInstance;  
     let generated = shared.generate(150)
     let cleanedUp = nlpMan.smoosh(generated)
     
