@@ -1,7 +1,7 @@
 # Fit2Fake
 The Times, they are a changin'! And so, you might like to be changin' the Times. 
 
-This little project takes some news summaries from a simle server that caches stories from the NY Times API, and other APIs, and lets you select them, and generates new text based on the original stories. It uses a travesty method I've been using for more than 40 years.
+This little project takes some news summaries from a simple server that caches stories from the NY Times API, and other APIs, and lets you select them, and generates new text based on the original stories. It uses a travesty method I've been using for more than 40 years.
 
 ## Usage
 - FORGET: clears the dictionary.
